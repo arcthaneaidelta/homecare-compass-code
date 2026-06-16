@@ -12,7 +12,7 @@ import {
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import aboutImg from "@/assets/about-care.jpg";
+import aboutImg from "@/assets/about-care.webp";
 import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
 
 export const Route = createFileRoute("/about")({
