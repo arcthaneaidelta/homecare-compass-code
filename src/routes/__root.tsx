@@ -140,6 +140,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
+      <CursorFollower />
       <Toaster richColors closeButton position="top-center" />
     </QueryClientProvider>
   );
