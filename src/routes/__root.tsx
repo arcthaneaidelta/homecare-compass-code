@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { CursorFollower } from "@/components/site/CursorFollower";
+import { AmbientBackdrop } from "@/components/site/AmbientBackdrop";
+import { AmbientCursorLight } from "@/components/site/AmbientCursorLight";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -133,7 +135,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-dvh flex-col">
+      <AmbientBackdrop />
+      <AmbientCursorLight />
+      <div className="relative flex min-h-dvh flex-col">
         <SiteHeader />
         <main className="flex-1">
           <Outlet />
