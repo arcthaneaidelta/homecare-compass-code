@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { Reveal } from "@/components/site/Reveal";
 import {
   ArrowUpRight,
   Check,
@@ -83,88 +85,145 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <AboutDomiciliary />
-      <ServicesOverview />
-      <WhyChooseUs />
-      <DirectorMessage />
-      <OurValues />
-      <CareOptions />
-      <HowItWorks />
-      <CareTeam />
-      <Compliance />
-      <Testimonials />
-      <Stats />
-      <FAQ />
-      <CareerCTA />
-      <ContactSection />
+      <Reveal><AboutDomiciliary /></Reveal>
+      <Reveal><ServicesOverview /></Reveal>
+      <Reveal><WhyChooseUs /></Reveal>
+      <Reveal><DirectorMessage /></Reveal>
+      <Reveal><OurValues /></Reveal>
+      <Reveal><CareOptions /></Reveal>
+      <Reveal><HowItWorks /></Reveal>
+      <Reveal><CareTeam /></Reveal>
+      <Reveal><Compliance /></Reveal>
+      <Reveal><Testimonials /></Reveal>
+      <Reveal><Stats /></Reveal>
+      <Reveal><FAQ /></Reveal>
+      <Reveal><CareerCTA /></Reveal>
+      <Reveal><ContactSection /></Reveal>
     </>
   );
 }
 
 /* ---------------- Hero ---------------- */
 function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.18]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.6]);
+
+  const ease = [0.22, 1, 0.36, 1] as const;
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    show: (i: number = 0) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, delay: 0.1 + i * 0.12, ease },
+    }),
+  };
+
   return (
-    <section className="relative overflow-hidden">
+    <section ref={ref} className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 sm:pt-8">
         <div className="relative overflow-hidden rounded-[32px] bg-navy text-navy-foreground shadow-elegant">
-          <img
+          <motion.img
             src={heroImg}
             alt="WeCare2 caregiver supporting an elderly woman at home"
-            className="absolute inset-0 size-full object-cover opacity-65"
+            className="absolute inset-0 size-full object-cover opacity-65 will-change-transform"
             width={1600}
             height={1024}
+            style={prefersReducedMotion ? undefined : { y: imageY, scale: imageScale }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/30" />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/30"
+            style={prefersReducedMotion ? undefined : { opacity: overlayOpacity }}
+          />
           <div className="relative grid gap-10 px-6 py-16 sm:px-12 sm:py-24 lg:py-32">
             <div className="max-w-3xl">
-              <Eyebrow className="text-brand-red">Welcome to WeCare2</Eyebrow>
-              <h1 className="mt-5 text-balance text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl">
+              <motion.div initial="hidden" animate="show" custom={0} variants={fadeUp}>
+                <Eyebrow className="text-brand-red">Welcome to WeCare2</Eyebrow>
+              </motion.div>
+              <motion.h1
+                initial="hidden"
+                animate="show"
+                custom={1}
+                variants={fadeUp}
+                className="mt-5 text-balance text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl"
+              >
                 Professional Domiciliary Care{" "}
                 <span className="display-italic text-white/95">in the comfort of your home.</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+              </motion.h1>
+              <motion.p
+                initial="hidden"
+                animate="show"
+                custom={2}
+                variants={fadeUp}
+                className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg"
+              >
                 Compassionate, reliable and personalised home care that helps individuals
                 maintain independence, dignity and quality of life — supported by a team you can trust.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              </motion.p>
+              <motion.div
+                initial="hidden"
+                animate="show"
+                custom={3}
+                variants={fadeUp}
+                className="mt-8 flex flex-wrap gap-3"
+              >
                 <Button
                   asChild
                   size="lg"
-                  className="h-12 rounded-full bg-brand-red px-6 text-brand-red-foreground shadow-lg hover:bg-brand-red/90"
+                  className="h-12 rounded-full bg-brand-red px-6 text-brand-red-foreground shadow-lg transition-transform hover:bg-brand-red/90 hover:scale-[1.03]"
                 >
                   <Link to="/contact">
-                    Request Care Assessment <ArrowUpRight className="size-4" />
+                    Request Care Assessment <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </Button>
                 <Button
                   asChild
                   size="lg"
                   variant="outline"
-                  className="h-12 rounded-full border-white/40 bg-white/0 px-6 text-white backdrop-blur hover:bg-white/10 hover:text-white"
+                  className="h-12 rounded-full border-white/40 bg-white/0 px-6 text-white backdrop-blur transition-transform hover:bg-white/10 hover:text-white hover:scale-[1.03]"
                 >
                   <Link to="/careers">Become A Carer</Link>
                 </Button>
-              </div>
+              </motion.div>
             </div>
 
-            <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.08, delayChildren: 0.5 } },
+              }}
+              className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+            >
               {[
                 "Fully Trained Carers",
                 "Personalised Care Plans",
                 "Flexible Scheduling",
                 "24/7 Support",
               ].map((t) => (
-                <div
+                <motion.div
                   key={t}
+                  variants={{
+                    hidden: { opacity: 0, y: 18 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+                  }}
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
                   className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-medium text-white backdrop-blur"
                 >
                   <span className="grid size-6 place-items-center rounded-full bg-brand-red">
                     <Check className="size-3.5 text-white" />
                   </span>
                   {t}
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
