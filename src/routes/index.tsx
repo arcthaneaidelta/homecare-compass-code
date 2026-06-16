@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef, useState } from "react";
-import { toast } from "sonner";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/site/Reveal";
 import {
@@ -10,44 +9,30 @@ import {
   ShieldCheck,
   HeartHandshake,
   Users,
-  Clock,
-  Pill,
-  UtensilsCrossed,
-  Home as HomeIcon,
-  Activity,
   Sparkles,
-  ChevronLeft,
-  ChevronRight,
-  GraduationCap,
-  BadgeCheck,
+  Brain,
+  UtensilsCrossed,
+  Stethoscope,
+  HomeIcon,
+  Phone,
   ClipboardCheck,
+  UserCheck,
+  Repeat,
+  CalendarCheck,
   Quote,
+  BadgeCheck,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { StatCounter } from "@/components/site/StatCounter";
+import { CtaBand } from "@/components/site/CtaBand";
 import { cn } from "@/lib/utils";
 
 import heroImg from "@/assets/hero-domiciliary.webp";
@@ -58,7 +43,6 @@ import overnightImg from "@/assets/care-overnight.webp";
 import liveinImg from "@/assets/care-livein.webp";
 import respiteImg from "@/assets/care-respite.webp";
 import contactImg from "@/assets/contact-carer.webp";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -84,25 +68,25 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-
 function HomePage() {
   return (
     <>
       <Hero />
-      <Reveal><AboutDomiciliary /></Reveal>
-      <Reveal><ServicesOverview /></Reveal>
+      <Reveal><AboutSection /></Reveal>
+      <Reveal><ServicesSection /></Reveal>
+      <Reveal><ServiceCtaBanner /></Reveal>
       <Reveal><WhyChooseUs /></Reveal>
       <Reveal><DirectorMessage /></Reveal>
-      <Reveal><OurValues /></Reveal>
-      <Reveal><CareOptions /></Reveal>
       <Reveal><HowItWorks /></Reveal>
-      <Reveal><CareTeam /></Reveal>
-      <Reveal><Compliance /></Reveal>
-      <Reveal><Testimonials /></Reveal>
-      <Reveal><Stats /></Reveal>
-      <Reveal><FAQ /></Reveal>
-      <Reveal><CareerCTA /></Reveal>
-      <Reveal><ContactSection /></Reveal>
+      <Reveal><StatsBand /></Reveal>
+      <Reveal><ConsultationCta /></Reveal>
+      <Reveal><PricingPlans /></Reveal>
+      <Reveal><FeatureHighlights /></Reveal>
+      <Reveal><TestimonialsSection /></Reveal>
+      <Reveal><FaqSection /></Reveal>
+      <Reveal><ReviewsMarquee /></Reveal>
+      <Reveal><BlogTeaser /></Reveal>
+      <CtaBand />
     </>
   );
 }
@@ -137,9 +121,7 @@ function Hero() {
   return (
     <section ref={ref} className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 sm:pt-8">
-        {/* Top row: navy text card + hero image */}
         <div className="grid gap-5 lg:grid-cols-[1.05fr_1fr]">
-          {/* Left: dark text card */}
           <motion.div
             initial="hidden"
             animate="show"
@@ -176,7 +158,6 @@ function Hero() {
                 why we focus on personalised, person-centred care that nurtures mind, body and spirit.
               </motion.p>
 
-              {/* Rotating book-appointment badge */}
               <motion.div
                 variants={fadeUp}
                 custom={4}
@@ -229,7 +210,6 @@ function Hero() {
             </div>
           </motion.div>
 
-          {/* Right: hero image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -250,7 +230,6 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* Bottom row: small image + working hours + (image continues visually) */}
         <motion.div
           initial="hidden"
           animate="show"
@@ -259,12 +238,12 @@ function Hero() {
         >
           <motion.div
             variants={fadeUp}
-            className="group relative overflow-hidden rounded-[28px] shadow-card min-h-[200px]"
+            className="img-zoom relative rounded-[28px] shadow-card min-h-[200px]"
           >
             <img
               src={aboutImg}
               alt="Caregiver with senior in a bright home"
-              className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="absolute inset-0 size-full object-cover"
               loading="lazy"
             />
           </motion.div>
@@ -315,7 +294,6 @@ function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Trust bar */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -338,117 +316,229 @@ function Hero() {
   );
 }
 
-/* ---------------- About Domiciliary ---------------- */
-function AboutDomiciliary() {
+/* ---------------- About ---------------- */
+function AboutSection() {
+  const ABOUT_POINTS = [
+    "Person-centred care plans built around routines, preferences and goals.",
+    "Carefully matched carers — same familiar face, visit after visit.",
+    "Fully trained, DBS-checked and continuously supported staff.",
+    "Family portal with real-time visit notes and updates.",
+  ];
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
-      <div className="grid items-center gap-12 lg:grid-cols-2">
+      <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
+        {/* Stacked images */}
         <div className="relative">
-          <div className="group overflow-hidden rounded-[32px] shadow-card">
+          <div className="img-zoom rounded-[32px] shadow-elegant">
             <img
               src={aboutImg}
-              alt="Elderly man reading while caregiver brings tea"
-              className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              width={1200}
-              height={1200}
+              alt="Carer supporting a senior in their living room"
+              className="aspect-[4/5] size-full object-cover"
               loading="lazy"
             />
           </div>
-          <div className="absolute -bottom-6 -right-2 hidden rounded-2xl bg-white px-5 py-4 shadow-elegant sm:flex sm:items-center sm:gap-3">
-            <div className="flex -space-x-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="size-9 rounded-full border-2 border-white bg-gradient-to-br from-brand-red/70 to-navy/70" />
-              ))}
-            </div>
+          <div className="img-zoom absolute -bottom-10 -right-4 hidden w-2/3 rounded-[24px] border-8 border-background shadow-elegant sm:block">
+            <img
+              src={liveinImg}
+              alt="Carer assisting with daily activities"
+              className="aspect-[5/4] size-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="absolute -left-4 top-6 hidden rounded-2xl bg-white px-4 py-3 shadow-elegant md:flex md:items-center md:gap-3">
+            <span className="grid size-10 place-items-center rounded-full bg-accent text-brand-red">
+              <HeartHandshake className="size-5" />
+            </span>
             <div>
-              <div className="flex items-center gap-0.5 text-brand-red">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="size-3.5 fill-current" />
-                ))}
-              </div>
-              <p className="text-sm font-semibold text-navy">4.9/5 Family Rating</p>
-              <p className="text-[11px] text-muted-foreground">500+ families supported</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">Since 2018</p>
+              <p className="font-display text-base text-navy">Care with heart</p>
             </div>
           </div>
         </div>
 
+        {/* Copy */}
         <div>
-          <Eyebrow>About Domiciliary Care</Eyebrow>
+          <Eyebrow>About Us</Eyebrow>
           <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
-            Care delivered <span className="display-italic text-brand-red">where you feel most at home.</span>
+            Dedicated to quality home care with{" "}
+            <span className="display-italic text-brand-red">compassion and respect</span> always.
           </h2>
           <p className="mt-5 text-muted-foreground sm:text-lg">
-            Domiciliary care brings trained, compassionate carers directly to your door — so your
-            loved one can stay surrounded by familiar comforts, routines and memories.
+            WeCare2 is a UK domiciliary care provider supporting people to live independently
+            and well in their own home. From a few hours a week of companionship to round-the-clock
+            live-in care, we tailor every plan to the person — never the schedule.
           </p>
-          <ul className="mt-8 space-y-4">
-            {[
-              { t: "Remain in your own home", d: "Familiar surroundings reduce stress and support wellbeing." },
-              { t: "Protect independence and dignity", d: "Care is shaped around how you choose to live." },
-              { t: "Peace of mind for families", d: "Consistent updates, trained carers and 24/7 support." },
-            ].map((it) => (
-              <li key={it.t} className="flex gap-4">
-                <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-accent text-brand-red">
-                  <Check className="size-4" />
+
+          <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+            {ABOUT_POINTS.map((p) => (
+              <li key={p} className="flex items-start gap-3 text-sm text-navy">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand-red text-white">
+                  <Check className="size-3.5" />
                 </span>
-                <div>
-                  <p className="font-semibold text-navy">{it.t}</p>
-                  <p className="text-sm text-muted-foreground">{it.d}</p>
-                </div>
+                <span className="leading-relaxed">{p}</span>
               </li>
             ))}
           </ul>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="h-12 rounded-full bg-brand-red px-6 text-brand-red-foreground cta-glow hover:bg-brand-red/90"
+            >
+              <Link to="/about">
+                More About Us <ArrowUpRight className="size-4" />
+              </Link>
+            </Button>
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <span className="grid size-10 place-items-center rounded-full bg-accent text-brand-red">
+                <Phone className="size-4" />
+              </span>
+              <div>
+                <p className="text-xs uppercase tracking-wider">Speak to our team</p>
+                <a href="tel:01229846646" className="font-semibold text-navy hover:text-brand-red">
+                  01229 846646
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Services Overview ---------------- */
+/* ---------------- Services (asymmetric) ---------------- */
 const SERVICES = [
-  { icon: HeartHandshake, title: "Personal Care", desc: "Discreet support with bathing, dressing, hygiene and continence — always with dignity.", to: "/services/personal-care" },
-  { icon: Users, title: "Companionship Care", desc: "Warm conversation, hobbies and trips out that brighten every day.", to: "/services/companionship-care" },
-  { icon: Pill, title: "Medication Assistance", desc: "Reliable prompts, administration and tracking by trained carers.", to: "/services" },
-  { icon: UtensilsCrossed, title: "Meal Preparation", desc: "Nourishing, home-cooked meals tailored to taste, culture and dietary needs.", to: "/services" },
-  { icon: HomeIcon, title: "Household Support", desc: "Light housekeeping, laundry and errands that keep home running smoothly.", to: "/services" },
-  { icon: Activity, title: "Mobility Assistance", desc: "Safe transfers, walking support and gentle exercise to keep you moving.", to: "/services" },
+  { icon: HeartHandshake, t: "Personal Care", d: "Discreet support with bathing, dressing, hygiene and continence.", img: hourlyImg, to: "/services/personal-care" },
+  { icon: HomeIcon, t: "Live-In Care", d: "Round-the-clock dedicated care from a carer who lives with you.", img: liveinImg, to: "/services/live-in-care" },
+  { icon: Users, t: "Companionship Care", d: "Warm conversation, hobbies and trips out that brighten every day.", img: aboutImg, to: "/services/companionship-care" },
+  { icon: CalendarCheck, t: "Respite Care", d: "Flexible cover that gives family carers a well-deserved break.", img: respiteImg, to: "/services/respite-care" },
+  { icon: Brain, t: "Dementia & Overnight", d: "Specialist, patient support through day and night.", img: overnightImg, to: "/services" },
 ];
 
-function ServicesOverview() {
+function ServicesSection() {
   return (
     <section className="bg-surface py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <Eyebrow>Our Services</Eyebrow>
-            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-              Professional home care rooted in{" "}
-              <span className="display-italic text-brand-red">compassion.</span>
+            <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
+              Personalised support for a{" "}
+              <span className="display-italic text-brand-red">better quality of life.</span>
             </h2>
           </div>
-          <p className="max-w-md text-muted-foreground">
-            Every WeCare2 service is built around a personalised plan, delivered by trained
-            carers and supervised by experienced coordinators.
-          </p>
+          <Button asChild variant="outline" className="h-11 rounded-full border-navy/15 px-5">
+            <Link to="/services">
+              All Services <ArrowUpRight className="size-4" />
+            </Link>
+          </Button>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map(({ icon: Icon, title, desc, to }) => (
+        <div className="mt-12 grid gap-5 lg:grid-cols-[1.1fr_1fr]">
+          {/* Large feature card */}
+          <Link
+            to={SERVICES[0].to}
+            className="group card-lift img-zoom relative flex min-h-[460px] flex-col justify-end overflow-hidden rounded-[32px] bg-navy p-8 text-white shadow-card lg:row-span-2"
+          >
+            <img
+              src={SERVICES[0].img}
+              alt={SERVICES[0].t}
+              className="absolute inset-0 size-full object-cover opacity-70"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
+            <div className="relative">
+              <span className="inline-grid size-12 place-items-center rounded-2xl bg-brand-red text-brand-red-foreground transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
+                <HeartHandshake className="size-6" />
+              </span>
+              <h3 className="mt-5 text-2xl text-white sm:text-3xl">{SERVICES[0].t}</h3>
+              <p className="mt-3 max-w-md text-sm text-white/85">{SERVICES[0].d}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-red">
+                Learn more
+                <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </div>
+          </Link>
+
+          {/* Right side: 2x2 grid of small cards */}
+          <div className="grid gap-5 sm:grid-cols-2">
+            {SERVICES.slice(1).map(({ icon: Icon, t, d, to }) => (
+              <Link
+                key={t}
+                to={to}
+                className="group card-lift flex flex-col gap-4 rounded-3xl border border-border bg-card p-6 shadow-soft"
+              >
+                <span className="grid size-12 place-items-center rounded-2xl bg-accent text-brand-red transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
+                  <Icon className="size-6" />
+                </span>
+                <h3 className="text-lg font-semibold text-navy">{t}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{d}</p>
+                <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-brand-red">
+                  Learn more
+                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Service CTA Banner ---------------- */
+function ServiceCtaBanner() {
+  const prefersReducedMotion = useReducedMotion();
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="relative overflow-hidden rounded-[32px] shadow-elegant">
+        <img
+          src={contactImg}
+          alt="Carer with senior client"
+          className="absolute inset-0 size-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-transparent" />
+        <div className="relative grid gap-10 px-8 py-16 sm:px-14 sm:py-20 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+          <div>
+            <Eyebrow className="text-brand-red">Your Trusted Partner</Eyebrow>
+            <h2 className="mt-4 text-balance text-3xl text-white sm:text-4xl md:text-5xl">
+              Ready to start your journey to{" "}
+              <span className="display-italic text-white/95">comfort and recovery?</span>
+            </h2>
+            <p className="mt-5 max-w-xl text-white/80">
+              From a free home assessment to a fully tailored care plan — we make
+              arranging care simple, transparent and stress-free.
+            </p>
+          </div>
+          <div className="flex justify-start lg:justify-end">
             <Link
-              key={title}
-              to={to}
-              className="card-lift group flex flex-col gap-4 rounded-3xl border border-border bg-card p-7 shadow-soft"
+              to="/contact"
+              aria-label="Request care assessment"
+              className="group relative grid size-36 place-items-center rounded-full bg-brand-red text-brand-red-foreground shadow-elegant transition-transform duration-500 hover:scale-105"
             >
-              <span className="grid size-12 place-items-center rounded-2xl bg-accent text-brand-red transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-                <Icon className="size-6" />
-              </span>
-              <h3 className="text-xl font-semibold text-navy">{title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
-              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-brand-red">
-                Learn more <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
+              <svg
+                viewBox="0 0 100 100"
+                className={cn(
+                  "absolute inset-0 size-full text-white/90",
+                  !prefersReducedMotion && "motion-safe:animate-[spin_20s_linear_infinite]",
+                )}
+                aria-hidden
+              >
+                <defs>
+                  <path id="cta-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
+                </defs>
+                <text fill="currentColor" className="text-[10px] uppercase tracking-[0.22em]">
+                  <textPath href="#cta-circle">
+                    Get Started • Get Started •
+                  </textPath>
+                </text>
+              </svg>
+              <ArrowUpRight className="size-8 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
-          ))}
+          </div>
         </div>
       </div>
     </section>
@@ -456,40 +546,59 @@ function ServicesOverview() {
 }
 
 /* ---------------- Why Choose Us ---------------- */
+const REASONS = [
+  { icon: HeartHandshake, t: "Compassionate & Experienced Staff", d: "Carefully selected carers with real warmth, deep training and ongoing support." },
+  { icon: ShieldCheck, t: "Outstanding Standards of Service", d: "CQC-aligned policies, DBS-checked staff and rigorous quality monitoring." },
+  { icon: Sparkles, t: "Holistic Approach to Wellbeing", d: "Care that nurtures mind and body — companionship, nutrition and routine matter." },
+];
 function WhyChooseUs() {
-  const items = [
-    { t: "Experienced Care Team", d: "Carers and coordinators with years of frontline experience in nursing and care home management." },
-    { t: "Personalised Care Plans", d: "Every plan is shaped around the person — their routines, preferences and goals." },
-    { t: "Flexible Care Packages", d: "From hourly visits to live-in care, our packages flex around your changing needs." },
-    { t: "Reliable & Consistent", d: "The same trusted faces wherever possible, with 24/7 support behind every visit." },
-  ];
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
-      <div className="relative overflow-hidden rounded-[32px] bg-navy px-6 py-16 text-navy-foreground sm:px-12 sm:py-20">
-        <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(800px 400px at 80% 0%, oklch(0.62 0.215 25 / 0.35), transparent 60%)" }} />
-        <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <div>
-            <Eyebrow className="text-brand-red">Why Choose Us</Eyebrow>
-            <h2 className="mt-4 text-balance text-3xl text-white sm:text-4xl md:text-5xl">
-              Dedicated to comfort, dignity{" "}
-              <span className="display-italic text-white/95">and true compassion.</span>
-            </h2>
-            <p className="mt-5 max-w-md text-white/75">
-              We pair carefully recruited carers with the right clients — and back them with
-              ongoing training, supervision and 24/7 support.
-            </p>
+    <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
+      <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+        <div className="img-zoom relative rounded-[32px] shadow-elegant">
+          <img
+            src={liveinImg}
+            alt="Carer with senior client at home"
+            className="aspect-[4/5] size-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute -right-4 bottom-8 hidden rounded-2xl bg-white px-5 py-4 shadow-elegant sm:block">
+            <div className="flex items-center gap-1 text-brand-red">
+              {[...Array(5)].map((_, i) => <Star key={i} className="size-3.5 fill-current" />)}
+            </div>
+            <p className="mt-1 text-sm font-semibold text-navy">4.9 / 5 average rating</p>
+            <p className="text-xs text-muted-foreground">From 500+ families across the UK</p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {items.map((it) => (
-              <div key={it.t} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                <div className="grid size-10 place-items-center rounded-xl bg-brand-red">
-                  <Sparkles className="size-5 text-white" />
+        </div>
+        <div>
+          <Eyebrow>Why Choose Us</Eyebrow>
+          <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
+            A community where seniors{" "}
+            <span className="display-italic text-brand-red">thrive, not just survive.</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground sm:text-lg">
+            We blend professional clinical standards with genuine human warmth — the kind of care
+            we would want for our own families.
+          </p>
+          <ol className="mt-8 space-y-5">
+            {REASONS.map(({ icon: Icon, t, d }, i) => (
+              <li
+                key={t}
+                className="group flex items-start gap-5 rounded-2xl border border-transparent p-4 transition-all duration-500 hover:border-border hover:bg-card hover:shadow-card"
+              >
+                <span className="relative grid size-14 shrink-0 place-items-center rounded-2xl bg-accent text-brand-red transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
+                  <Icon className="size-6" />
+                  <span className="absolute -right-1 -top-1 grid size-6 place-items-center rounded-full bg-brand-red text-[11px] font-bold text-brand-red-foreground">
+                    {i + 1}
+                  </span>
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-navy">{t}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{d}</p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-white">{it.t}</h3>
-                <p className="mt-2 text-sm text-white/70">{it.d}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>
@@ -503,7 +612,7 @@ function DirectorMessage() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative">
-            <div className="overflow-hidden rounded-[32px] shadow-elegant">
+            <div className="img-zoom rounded-[32px] shadow-elegant">
               <img
                 src={masonWardImg.url}
                 alt="Mason Ward, Director of Care at WeCare2"
@@ -535,10 +644,6 @@ function DirectorMessage() {
               across the UK. We hold ourselves to the same standard we would expect for our own
               loved ones — compassion, dignity, independence and complete trust.
             </p>
-            <p className="mt-4 text-muted-foreground">
-              Every carer we welcome is carefully selected, fully trained and supported. Every care
-              plan is built around the person — never the schedule. That's our promise.
-            </p>
 
             <div className="mt-8 flex items-end gap-4">
               <div>
@@ -551,20 +656,6 @@ function DirectorMessage() {
                 </Link>
               </Button>
             </div>
-
-            <div className="mt-10 grid gap-4 rounded-3xl border border-border bg-card p-5 shadow-soft sm:grid-cols-4">
-              {[
-                ["500+", "Families Supported"],
-                ["100+", "Care Professionals"],
-                ["95%", "Satisfaction Rate"],
-                ["100%", "Fully Qualified"],
-              ].map(([n, l]) => (
-                <div key={l} className="text-center">
-                  <div className="font-display text-2xl font-medium text-navy">{n}</div>
-                  <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">{l}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
@@ -572,97 +663,213 @@ function DirectorMessage() {
   );
 }
 
-/* ---------------- Our Values ---------------- */
-const VALUES = [
-  { t: "Compassion", d: "Every visit begins with genuine kindness and patience." },
-  { t: "Respect", d: "Care that honours your choices, identity and routines." },
-  { t: "Dignity", d: "Discreet, considerate support — always on your terms." },
-  { t: "Integrity", d: "Honest communication with families, always." },
-  { t: "Independence", d: "Care that supports — never replaces — what you can do." },
+/* ---------------- How It Works ---------------- */
+const STEPS = [
+  { icon: Phone, t: "Free Consultation", d: "We listen and learn about your needs, routines and goals." },
+  { icon: ClipboardCheck, t: "Tailored Care Plan", d: "A bespoke plan written with you and your family, not for you." },
+  { icon: UserCheck, t: "Caregiver Matching", d: "We carefully match a small team of carers to your personality and needs." },
+  { icon: Repeat, t: "Ongoing Reviews", d: "Regular check-ins so the plan grows with you over time." },
 ];
-
-function OurValues() {
+function HowItWorks() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-2xl text-center">
-        <Eyebrow className="justify-center">Our Values</Eyebrow>
+        <Eyebrow className="justify-center">How It Works</Eyebrow>
         <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-          The principles that <span className="display-italic text-brand-red">guide every visit.</span>
+          Your trusted partner in{" "}
+          <span className="display-italic text-brand-red">home health and wellness.</span>
         </h2>
       </div>
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-        {VALUES.map((v, i) => (
-          <div
-            key={v.t}
-            className={cn(
-              "rounded-3xl border border-border bg-card p-6 shadow-soft transition-transform hover:-translate-y-1",
-              i === 2 && "bg-navy text-navy-foreground border-navy",
-            )}
-          >
-            <div className={cn(
-              "grid size-10 place-items-center rounded-xl",
-              i === 2 ? "bg-brand-red text-white" : "bg-accent text-brand-red",
-            )}>
-              <HeartHandshake className="size-5" />
-            </div>
-            <h3 className={cn("mt-4 text-lg font-semibold", i === 2 ? "text-white" : "text-navy")}>{v.t}</h3>
-            <p className={cn("mt-2 text-sm", i === 2 ? "text-white/75" : "text-muted-foreground")}>{v.d}</p>
-          </div>
-        ))}
+
+      <div className="relative mt-16">
+        {/* connector line */}
+        <div className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-brand-red/30 to-transparent lg:block" />
+        <ol className="grid gap-8 lg:grid-cols-4">
+          {STEPS.map(({ icon: Icon, t, d }, i) => (
+            <li key={t} className="group relative text-center">
+              <div className="relative mx-auto grid size-14 place-items-center rounded-full border-2 border-brand-red/30 bg-background text-brand-red transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-6">
+                <Icon className="size-6" />
+                <span className="absolute -right-2 -top-2 grid size-7 place-items-center rounded-full bg-brand-red text-xs font-bold text-brand-red-foreground shadow-soft">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-navy">{t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{d}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
 }
 
-/* ---------------- Care Options ---------------- */
-const OPTIONS = [
-  { img: hourlyImg, title: "Hourly Care", desc: "From short check-in visits to several hours of daily support — flexible care that fits your routine.", bullets: ["Visits from 30 minutes", "Daily personal care", "Errands & companionship"] },
-  { img: overnightImg, title: "Overnight Care", desc: "A trained carer on hand through the night for reassurance, mobility support and medication.", bullets: ["Sleeping or waking nights", "Medication overnight", "Help with toileting"] },
-  { img: liveinImg, title: "Live-In Care", desc: "A dedicated carer living in your home — a trusted alternative to moving into residential care.", bullets: ["24/7 dedicated support", "Continuity & companionship", "Complex needs supported"] },
-  { img: respiteImg, title: "Respite Care", desc: "Short-term, flexible care that gives family carers a well-deserved break with total peace of mind.", bullets: ["Days, weeks or longer", "After hospital discharge", "Holiday cover"] },
-];
+/* ---------------- Stats Band ---------------- */
+function StatsBand() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div className="relative overflow-hidden rounded-[32px] bg-navy px-6 py-14 sm:px-12">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{ background: "radial-gradient(800px 320px at 0% 100%, color-mix(in oklab, var(--color-brand-red) 30%, transparent), transparent 60%)" }}
+        />
+        <div className="relative grid items-end gap-10 lg:grid-cols-[1fr_2fr]">
+          <div>
+            <Eyebrow className="text-brand-red">Our Facts</Eyebrow>
+            <h2 className="mt-4 text-balance text-3xl text-white sm:text-4xl">
+              Our home care impact in{" "}
+              <span className="display-italic text-white/95">real numbers.</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            <StatCounter to={500} suffix="+" label="Happy Families" inverted />
+            <StatCounter to={12} suffix="+" label="Years Experience" inverted />
+            <StatCounter to={100} suffix="+" label="Care Professionals" inverted />
+            <StatCounter to={95} suffix="%" label="Satisfaction" inverted />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-function CareOptions() {
+/* ---------------- Consultation CTA ---------------- */
+function ConsultationCta() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
+      <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="img-zoom rounded-[32px] shadow-elegant">
+          <img
+            src={contactImg}
+            alt="Friendly carer chatting with family"
+            className="aspect-[5/4] size-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <Eyebrow>Join Us Today</Eyebrow>
+          <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
+            Schedule a personalised{" "}
+            <span className="display-italic text-brand-red">tour or care consultation.</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground sm:text-lg">
+            A free, no-obligation conversation is the easiest first step. Our coordinators
+            will guide you through every option and answer every question.
+          </p>
+          <ul className="mt-7 space-y-3 text-sm text-navy">
+            {[
+              "Usually within 24 hours of contact",
+              "Free in-home assessment with no obligation",
+              "Detailed written care proposal and pricing",
+            ].map((p) => (
+              <li key={p} className="flex items-start gap-3">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand-red text-white">
+                  <Check className="size-3.5" />
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild size="lg" className="h-12 rounded-full bg-brand-red px-6 text-brand-red-foreground hover:bg-brand-red/90 cta-glow">
+              <Link to="/contact">Request Assessment <ArrowUpRight className="size-4" /></Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="h-12 rounded-full px-6">
+              <a href="tel:01229846646"><Phone className="size-4" /> 01229 846646</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Pricing ---------------- */
+const PLANS = [
+  {
+    name: "Hourly Care",
+    blurb: "Flexible visits when you need them",
+    price: "From £24",
+    unit: "/ hour",
+    features: ["Minimum 1-hour visits", "Personal & companionship care", "Medication prompts", "Family update notes"],
+    highlight: false,
+  },
+  {
+    name: "Daily Care",
+    blurb: "Full daytime support, every day",
+    price: "From £180",
+    unit: "/ day",
+    features: ["Up to 10 hours of care daily", "Personal care & meals", "Mobility & errands", "Same familiar carers"],
+    highlight: true,
+  },
+  {
+    name: "Live-In Care",
+    blurb: "24-hour dedicated home care",
+    price: "From £1,150",
+    unit: "/ week",
+    features: ["A carer who lives with you", "24-hour reassurance", "Personal & specialist care", "Family portal access"],
+    highlight: false,
+  },
+];
+function PricingPlans() {
   return (
     <section className="bg-surface py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <Eyebrow className="justify-center">Care Options</Eyebrow>
+          <Eyebrow className="justify-center">Pricing Plan</Eyebrow>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-            Choose the care that <span className="display-italic text-brand-red">fits your life.</span>
+            Home care plans that offer{" "}
+            <span className="display-italic text-brand-red">real value.</span>
           </h2>
         </div>
-
-        <div className="mt-14 flex flex-col gap-16">
-          {OPTIONS.map((o, i) => (
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          {PLANS.map((p) => (
             <div
-              key={o.title}
+              key={p.name}
               className={cn(
-                "grid items-center gap-10 lg:grid-cols-2",
-                i % 2 === 1 && "lg:[&>div:first-child]:order-2",
+                "card-lift relative flex flex-col rounded-3xl border p-8 shadow-soft",
+                p.highlight
+                  ? "border-transparent bg-navy text-white"
+                  : "border-border bg-card",
               )}
             >
-              <div className="overflow-hidden rounded-[28px] shadow-card">
-                <img src={o.img} alt={o.title} className="size-full object-cover" width={1280} height={960} loading="lazy" />
-              </div>
-              <div>
-                <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-red">
-                  Option {String(i + 1).padStart(2, "0")}
+              {p.highlight && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-red px-4 py-1 text-xs font-semibold uppercase tracking-wider text-brand-red-foreground shadow-card">
+                  Most Popular
                 </span>
-                <h3 className="mt-4 text-3xl sm:text-4xl">{o.title}</h3>
-                <p className="mt-3 text-muted-foreground sm:text-lg">{o.desc}</p>
-                <ul className="mt-6 space-y-2">
-                  {o.bullets.map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-sm">
-                      <Check className="size-4 text-brand-red" />
-                      <span className="text-navy">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild className="mt-7 h-11 rounded-full bg-navy px-5 text-navy-foreground hover:bg-navy/90">
-                  <Link to="/contact">Discuss this option <ArrowUpRight className="size-4" /></Link>
-                </Button>
+              )}
+              <h3 className={cn("text-2xl font-semibold", p.highlight ? "text-white" : "text-navy")}>{p.name}</h3>
+              <p className={cn("mt-1 text-sm", p.highlight ? "text-white/70" : "text-muted-foreground")}>
+                {p.blurb}
+              </p>
+              <div className="mt-6 flex items-baseline gap-1">
+                <span className={cn("font-display text-4xl font-medium", p.highlight ? "text-white" : "text-navy")}>{p.price}</span>
+                <span className={cn("text-sm", p.highlight ? "text-white/60" : "text-muted-foreground")}>{p.unit}</span>
               </div>
+              <ul className={cn("mt-6 space-y-3 text-sm", p.highlight ? "text-white/85" : "text-foreground")}>
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-start gap-3">
+                    <span className={cn(
+                      "mt-0.5 grid size-5 shrink-0 place-items-center rounded-full",
+                      p.highlight ? "bg-brand-red text-brand-red-foreground" : "bg-accent text-brand-red",
+                    )}>
+                      <Check className="size-3" />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Button
+                asChild
+                className={cn(
+                  "mt-8 h-11 rounded-full",
+                  p.highlight
+                    ? "bg-brand-red text-brand-red-foreground hover:bg-brand-red/90"
+                    : "bg-navy text-navy-foreground hover:bg-navy/90",
+                )}
+              >
+                <Link to="/contact">Get Started <ArrowUpRight className="size-4" /></Link>
+              </Button>
             </div>
           ))}
         </div>
@@ -671,101 +878,30 @@ function CareOptions() {
   );
 }
 
-/* ---------------- How It Works ---------------- */
-function HowItWorks() {
-  const steps = [
-    { n: "01", t: "Request A Free Assessment", d: "Tell us about you or your loved one. We'll arrange a free, no-obligation visit." },
-    { n: "02", t: "Receive A Personalised Plan", d: "Together we build a care plan around routines, preferences and goals." },
-    { n: "03", t: "Start Care With A Qualified Carer", d: "Care begins with the carer matched to you — supported 24/7 by our team." },
-  ];
+/* ---------------- Feature Highlights ---------------- */
+const FEATURES = [
+  { icon: HeartHandshake, t: "Social & Wellbeing" },
+  { icon: Brain, t: "Dementia Support" },
+  { icon: UtensilsCrossed, t: "Nutritious Meals" },
+  { icon: Stethoscope, t: "Skilled Nursing" },
+];
+function FeatureHighlights() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-2xl text-center">
-        <Eyebrow className="justify-center">How It Works</Eyebrow>
+        <Eyebrow className="justify-center">Comfort & Care</Eyebrow>
         <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-          Care that starts <span className="display-italic text-brand-red">with a conversation.</span>
+          Designed for comfort care and{" "}
+          <span className="display-italic text-brand-red">everyday living.</span>
         </h2>
       </div>
-      <div className="mt-14 grid gap-5 md:grid-cols-3">
-        {steps.map((s) => (
-          <div key={s.n} className="relative rounded-3xl border border-border bg-card p-8 shadow-soft">
-            <span className="font-display text-5xl font-medium text-brand-red/30">{s.n}</span>
-            <h3 className="mt-4 text-xl font-semibold text-navy">{s.t}</h3>
-            <p className="mt-3 text-sm text-muted-foreground">{s.d}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Care Team ---------------- */
-function CareTeam() {
-  const features = [
-    { icon: ShieldCheck, t: "DBS Checked", d: "Every carer fully vetted." },
-    { icon: GraduationCap, t: "Trained To Standard", d: "Care Certificate and beyond." },
-    { icon: BadgeCheck, t: "Continuous Development", d: "Ongoing supervision & training." },
-    { icon: ClipboardCheck, t: "Quality Monitored", d: "Regular audits and reviews." },
-  ];
-  return (
-    <section className="bg-surface py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <Eyebrow>Our Care Team</Eyebrow>
-            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-              People you can <span className="display-italic text-brand-red">truly trust.</span>
-            </h2>
-            <p className="mt-5 text-muted-foreground sm:text-lg">
-              We recruit for warmth and character first — then invest in the training, supervision
-              and support that turns good carers into great ones.
-            </p>
-            <Button asChild className="mt-6 h-11 rounded-full bg-brand-red px-5 text-brand-red-foreground hover:bg-brand-red/90">
-              <Link to="/team">Meet The Team <ArrowUpRight className="size-4" /></Link>
-            </Button>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {features.map(({ icon: Icon, t, d }) => (
-              <div key={t} className="rounded-3xl border border-border bg-card p-6 shadow-soft">
-                <div className="grid size-11 place-items-center rounded-xl bg-accent text-brand-red">
-                  <Icon className="size-5" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-navy">{t}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Compliance ---------------- */
-function Compliance() {
-  const items = [
-    "Safeguarding Policies",
-    "Quality Monitoring",
-    "Professional Standards",
-    "Continuous Training",
-    "Fully Vetted Staff",
-    "Care Assessments",
-  ];
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
-      <div className="mx-auto max-w-2xl text-center">
-        <Eyebrow className="justify-center">Compliance &amp; Quality</Eyebrow>
-        <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-          Built on the standards <span className="display-italic text-brand-red">families deserve.</span>
-        </h2>
-      </div>
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((it) => (
-          <div key={it} className="flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-soft">
-            <span className="grid size-11 place-items-center rounded-xl bg-navy text-white">
-              <ShieldCheck className="size-5" />
+      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {FEATURES.map(({ icon: Icon, t }) => (
+          <div key={t} className="card-lift group flex flex-col items-center gap-4 rounded-3xl border border-border bg-card p-8 text-center shadow-soft">
+            <span className="grid size-16 place-items-center rounded-full bg-accent text-brand-red transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
+              <Icon className="size-7" />
             </span>
-            <span className="font-semibold text-navy">{it}</span>
+            <h3 className="text-lg font-semibold text-navy">{t}</h3>
           </div>
         ))}
       </div>
@@ -775,74 +911,50 @@ function Compliance() {
 
 /* ---------------- Testimonials ---------------- */
 const TESTIMONIALS = [
-  { name: "Lauren Sharna", role: "Home Carer", text: "Worked with WeCare2 for a few months. Would highly recommend. I felt supported and all my questions were answered. If you're seeking flexibility, this company is for you." },
-  { name: "James Hopper", role: "Son of Client", text: "The team at WeCare2 brought calm and confidence into our home. Mum is happier, safer and still very much herself — and that's everything to us." },
-  { name: "Diane Hawthorne", role: "Daughter of Client", text: "Compassionate, professional and always communicative. I never worry — and that peace of mind is priceless." },
-  { name: "Michael Reid", role: "Client", text: "My carer arrives like clockwork and treats me like family. WeCare2 has given me back my independence." },
+  { q: "WeCare2 has been a blessing for our mum. The carers are warm, patient and treat her with such dignity.", a: "Sarah J.", r: "Daughter, Lancaster" },
+  { q: "Our live-in carer feels like part of the family. Dad is happier at home than he has been in years.", a: "Peter M.", r: "Son, Carnforth" },
+  { q: "From the first assessment they were honest and reassuring. The whole experience has been outstanding.", a: "Helen B.", r: "Wife, Kendal" },
 ];
-
-function Testimonials() {
+function TestimonialsSection() {
   return (
     <section className="bg-surface py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <Eyebrow>Testimonials</Eyebrow>
-            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-              Heartfelt feedback from <span className="display-italic text-brand-red">people who chose us.</span>
-            </h2>
-          </div>
-        </div>
-
-        <Carousel className="mt-12" opts={{ align: "start", loop: true }}>
-          <CarouselContent>
-            {TESTIMONIALS.map((t) => (
-              <CarouselItem key={t.name} className="md:basis-1/2 lg:basis-1/3">
-                <div className="flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft">
-                  <div className="flex items-center gap-1 text-brand-red">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-current" />)}
-                  </div>
-                  <Quote className="mt-5 size-6 text-brand-red/40" />
-                  <p className="mt-3 flex-1 text-[15px] leading-relaxed text-foreground/85">"{t.text}"</p>
-                  <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-                    <div className="size-10 rounded-full bg-gradient-to-br from-brand-red/70 to-navy/70" />
-                    <div>
-                      <p className="font-semibold text-navy">{t.name}</p>
-                      <p className="text-xs text-muted-foreground">{t.role}</p>
-                    </div>
-                  </div>
+        <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.4fr]">
+          <div className="rounded-[32px] bg-navy p-8 text-white shadow-elegant sm:p-10">
+            <Eyebrow className="text-brand-red">Testimonials</Eyebrow>
+            <div className="mt-4 flex items-center gap-3">
+              <span className="font-display text-6xl font-medium text-white">4.9</span>
+              <div>
+                <div className="flex text-brand-red">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-current" />)}
                 </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="mt-8 flex justify-end gap-2">
-            <CarouselPrevious className="static size-11 translate-x-0 translate-y-0 rounded-full border-navy/20 bg-card text-navy hover:bg-navy hover:text-white">
-              <ChevronLeft className="size-4" />
-            </CarouselPrevious>
-            <CarouselNext className="static size-11 translate-x-0 translate-y-0 rounded-full border-navy/20 bg-card text-navy hover:bg-navy hover:text-white">
-              <ChevronRight className="size-4" />
-            </CarouselNext>
+                <p className="text-xs text-white/70">From 500+ verified reviews</p>
+              </div>
+            </div>
+            <h2 className="mt-6 text-balance text-2xl text-white sm:text-3xl">
+              Real voices. Real care.{" "}
+              <span className="display-italic text-white/90">Real peace of mind.</span>
+            </h2>
+            <p className="mt-3 text-sm text-white/75">
+              Families across the UK trust WeCare2 to support the people they love most.
+            </p>
           </div>
-        </Carousel>
-      </div>
-    </section>
-  );
-}
 
-/* ---------------- Stats ---------------- */
-function Stats() {
-  return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <div className="rounded-[32px] bg-navy px-6 py-14 sm:px-12 sm:py-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { to: 500, suffix: "+", label: "Clients Supported" },
-            { to: 100, suffix: "+", label: "Care Professionals" },
-            { to: 20, suffix: "+", label: "Service Areas" },
-            { to: 95, suffix: "%", label: "Satisfaction Rate" },
-          ].map((s) => (
-            <StatCounter key={s.label} {...s} inverted />
-          ))}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {TESTIMONIALS.map((t, i) => (
+              <figure
+                key={i}
+                className="card-lift flex flex-col gap-4 rounded-3xl border border-border bg-card p-6 shadow-soft"
+              >
+                <Quote className="size-7 text-brand-red" />
+                <blockquote className="text-sm leading-relaxed text-navy">"{t.q}"</blockquote>
+                <figcaption className="mt-auto">
+                  <div className="font-semibold text-navy">{t.a}</div>
+                  <div className="text-xs text-muted-foreground">{t.r}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -851,38 +963,40 @@ function Stats() {
 
 /* ---------------- FAQ ---------------- */
 const FAQS = [
-  { q: "What is domiciliary care?", a: "Domiciliary care brings trained carers into your own home to provide support with daily living — from personal care and medication to companionship and household help." },
-  { q: "How much does care cost?", a: "Cost depends on the type and frequency of care you need. After a free assessment we'll provide a clear, transparent quote tailored to your care plan." },
-  { q: "Can services be customised?", a: "Yes — every WeCare2 care plan is built around the individual. You choose what support you need, when and how it's delivered." },
-  { q: "Are your carers trained?", a: "Every WeCare2 carer is fully DBS-checked, holds the Care Certificate and receives continuous supervision and additional specialist training." },
-  { q: "What areas do you cover?", a: "We currently support 20+ service areas across the UK. Get in touch with your postcode and we'll confirm availability." },
-  { q: "Is overnight care available?", a: "Yes — we offer both sleeping and waking night care, and full live-in care for round-the-clock support." },
-  { q: "How quickly can care start?", a: "In many cases care can start within 48–72 hours of your assessment. Urgent and hospital-discharge cases are prioritised." },
-  { q: "How do I book an assessment?", a: "Use the form below, call 01229 846646 or email admin@wecare2.co.uk and a coordinator will be in touch within one working day." },
+  { q: "How quickly can care begin?", a: "Most packages start within 5–7 days of your initial assessment, with urgent cases supported sooner." },
+  { q: "Are your carers fully vetted?", a: "Yes — every carer is enhanced DBS-checked, reference-verified and trained to Skills for Care standards." },
+  { q: "Can we change the care plan over time?", a: "Absolutely. Your plan is reviewed regularly and can be adjusted any time as needs change." },
+  { q: "Do you provide live-in care?", a: "Yes. A live-in carer moves in with you to provide round-the-clock support and companionship." },
+  { q: "How are visits monitored?", a: "Every visit is logged digitally with notes available to nominated family members through our portal." },
 ];
-
-function FAQ() {
+function FaqSection() {
   return (
-    <section className="bg-surface py-20 sm:py-28">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <Eyebrow className="justify-center">FAQ</Eyebrow>
-          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-            Everything you need to know about <span className="display-italic text-brand-red">home care.</span>
+    <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
+      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.2fr]">
+        <div>
+          <Eyebrow>FAQs</Eyebrow>
+          <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
+            Get the answers you need about{" "}
+            <span className="display-italic text-brand-red">our home care.</span>
           </h2>
+          <p className="mt-5 text-muted-foreground">
+            Can't see your question? Speak with a friendly coordinator — no obligation, ever.
+          </p>
+          <Button asChild className="mt-6 h-11 rounded-full bg-brand-red px-5 text-brand-red-foreground hover:bg-brand-red/90">
+            <Link to="/contact">Talk To Our Team <ArrowUpRight className="size-4" /></Link>
+          </Button>
         </div>
-        <Accordion type="single" collapsible className="mt-10 space-y-3">
+        <Accordion type="single" collapsible className="space-y-3">
           {FAQS.map((f, i) => (
-            <AccordionItem key={f.q} value={`item-${i}`} className="overflow-hidden rounded-2xl border border-border bg-card px-5 shadow-soft">
-              <AccordionTrigger className="py-5 text-left text-base font-semibold text-navy hover:no-underline">
-                <span className="flex items-center gap-3">
-                  <span className="font-display text-sm text-brand-red">{String(i + 1).padStart(2, "0")}</span>
-                  {f.q}
-                </span>
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="rounded-2xl border border-border bg-card px-5 shadow-soft transition-shadow hover:shadow-card"
+            >
+              <AccordionTrigger className="text-left text-base font-semibold text-navy hover:text-brand-red">
+                {f.q}
               </AccordionTrigger>
-              <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
-                {f.a}
-              </AccordionContent>
+              <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
@@ -891,127 +1005,88 @@ function FAQ() {
   );
 }
 
-/* ---------------- Career CTA ---------------- */
-function CareerCTA() {
-  const benefits = ["Flexible Hours", "Competitive Pay", "Ongoing Training", "Career Growth", "Supportive Environment"];
+/* ---------------- Reviews Marquee ---------------- */
+const REVIEWS = [
+  "Brilliant team — kind, professional and reliable.",
+  "Mum loves her carers. We finally have peace of mind.",
+  "Outstanding service from the very first phone call.",
+  "Truly compassionate care delivered with a smile.",
+  "Made a stressful time so much easier for our family.",
+  "Trustworthy, punctual and genuinely caring people.",
+];
+function ReviewsMarquee() {
+  const items = [...REVIEWS, ...REVIEWS];
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <div className="relative overflow-hidden rounded-[32px] bg-navy px-6 py-16 text-navy-foreground sm:px-12 sm:py-20">
-        <div className="absolute -right-20 -top-20 size-80 rounded-full bg-brand-red/30 blur-3xl" />
-        <div className="relative grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
-          <div>
-            <Eyebrow className="text-brand-red">Careers</Eyebrow>
-            <h2 className="mt-4 text-balance text-3xl text-white sm:text-4xl md:text-5xl">
-              Join our team of <span className="display-italic">professional carers.</span>
-            </h2>
-            <p className="mt-5 max-w-xl text-white/80">
-              We'll take care of uniforms, DBS checks and training — so you can focus on what truly
-              matters: delivering exceptional care.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {benefits.map((b) => (
-                <span key={b} className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-white">
-                  {b}
-                </span>
-              ))}
+    <section className="bg-surface py-14">
+      <div className="overflow-hidden">
+        <div className="flex w-max gap-4 motion-safe:animate-marquee">
+          {items.map((r, i) => (
+            <div
+              key={i}
+              className="flex shrink-0 items-center gap-3 rounded-full border border-border bg-card px-6 py-3 text-sm text-navy shadow-soft"
+            >
+              <Star className="size-4 fill-current text-brand-red" />
+              <span>{r}</span>
             </div>
-          </div>
-          <div className="flex justify-center lg:justify-end">
-            <div className="rounded-3xl bg-white p-8 text-center shadow-elegant">
-              <p className="font-display text-xl italic text-navy">Ready to make a difference?</p>
-              <p className="mt-2 text-sm text-muted-foreground">Apply in minutes — we respond within one working day.</p>
-              <Button asChild size="lg" className="mt-6 h-12 rounded-full bg-brand-red px-7 text-brand-red-foreground hover:bg-brand-red/90">
-                <Link to="/careers">Apply Now <ArrowUpRight className="size-4" /></Link>
-              </Button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Contact Section ---------------- */
-function ContactSection() {
-  const [submitting, setSubmitting] = useState(false);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast.success("Thank you — we'll be in touch within one working day.");
-      (e.target as HTMLFormElement).reset();
-    }, 700);
-  };
+/* ---------------- Blog Teaser ---------------- */
+const POSTS = [
+  {
+    img: aboutImg,
+    date: "10 Jun 2026",
+    t: "Simple Activities That Boost Senior Mental Health",
+    d: "Small daily rituals that nurture mood, memory and connection.",
+  },
+  {
+    img: liveinImg,
+    date: "02 Jun 2026",
+    t: "Family Involvement in Care: Staying Connected",
+    d: "How families and carers can work together for the best outcomes.",
+  },
+  {
+    img: respiteImg,
+    date: "24 May 2026",
+    t: "Navigating the Costs of Home Care: What to Know",
+    d: "A clear guide to funding options, allowances and planning ahead.",
+  },
+];
+function BlogTeaser() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
-      <div className="grid gap-10 lg:grid-cols-2">
-        <div className="relative">
-          <div className="overflow-hidden rounded-[32px] shadow-elegant">
-            <img src={contactImg} alt="Friendly WeCare2 caregiver" className="size-full object-cover" width={1200} height={1400} loading="lazy" />
-          </div>
-          <div className="absolute inset-x-6 bottom-6 rounded-2xl bg-white/95 px-5 py-4 backdrop-blur sm:max-w-xs">
-            <div className="flex items-center gap-2">
-              <Clock className="size-4 text-brand-red" />
-              <p className="text-sm font-semibold text-navy">Mon – Sun · 7am – 10pm</p>
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">Out of hours? Leave a message and we'll call you back first thing.</p>
-          </div>
-        </div>
-
-        <div>
-          <Eyebrow>Contact Us</Eyebrow>
-          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-            Caring support, <span className="display-italic text-brand-red">starts here.</span>
+      <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+        <div className="max-w-2xl">
+          <Eyebrow>From The Journal</Eyebrow>
+          <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
+            Explore articles that nurture,{" "}
+            <span className="display-italic text-brand-red">educate and inspire.</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Tell us a little about your situation and a senior coordinator will reach out to arrange
-            a free, no-obligation care assessment.
-          </p>
-
-          <form onSubmit={onSubmit} className="mt-8 grid gap-4 rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Full Name" name="name" type="text" required placeholder="Jane Smith" />
-              <Field label="Email" name="email" type="email" required placeholder="you@example.com" />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Phone Number" name="phone" type="tel" required placeholder="07700 900000" />
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-navy">Service Required</label>
-                <Select>
-                  <SelectTrigger className="h-11 rounded-xl">
-                    <SelectValue placeholder="Select a service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {["Personal Care", "Companionship Care", "Live-In Care", "Overnight Care", "Respite Care", "Dementia Support", "Other / Not Sure"].map((s) => (
-                      <SelectItem key={s} value={s}>{s}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-navy">Message</label>
-              <Textarea name="message" rows={5} placeholder="Tell us a little about the support you're looking for…" className="rounded-xl" />
-            </div>
-            <Button type="submit" disabled={submitting} size="lg" className="mt-2 h-12 w-full rounded-full bg-brand-red text-brand-red-foreground hover:bg-brand-red/90 sm:w-auto sm:self-start sm:px-7">
-              {submitting ? "Sending…" : (
-                <>Request A Care Consultation <ArrowUpRight className="size-4" /></>
-              )}
-            </Button>
-            <p className="text-xs text-muted-foreground">By submitting, you agree to be contacted by WeCare2 about your enquiry.</p>
-          </form>
         </div>
       </div>
+      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        {POSTS.map((p) => (
+          <article key={p.t} className="card-lift group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+            <div className="img-zoom relative aspect-[4/3]">
+              <img src={p.img} alt={p.t} className="absolute inset-0 size-full object-cover" loading="lazy" />
+              <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-navy shadow-soft">
+                {p.date}
+              </span>
+            </div>
+            <div className="flex flex-1 flex-col p-6">
+              <h3 className="text-lg font-semibold text-navy transition-colors group-hover:text-brand-red">{p.t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{p.d}</p>
+              <Link to="/contact" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-red">
+                Read More <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
-  );
-}
-
-function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <div>
-      <label className="mb-1.5 block text-sm font-medium text-navy">{label}</label>
-      <Input className="h-11 rounded-xl" {...props} />
-    </div>
   );
 }
