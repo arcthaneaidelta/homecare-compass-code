@@ -115,9 +115,8 @@ function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.18]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.6]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.14]);
 
   const ease = [0.22, 1, 0.36, 1] as const;
   const fadeUp = {
@@ -125,146 +124,215 @@ function Hero() {
     show: (i: number = 0) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, delay: 0.1 + i * 0.12, ease },
+      transition: { duration: 0.8, delay: 0.1 + i * 0.1, ease },
     }),
   };
+
+  const trustItems = [
+    { icon: Users, t: "Family-Like Bonds, Not Just Carers and Clients" },
+    { icon: ShieldCheck, t: "Comfort That Never Compromises on Dignity" },
+    { icon: Sparkles, t: "Every Detail Designed Around Each Individual" },
+  ];
 
   return (
     <section ref={ref} className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 sm:pt-8">
-        <div className="relative overflow-hidden rounded-[32px] bg-navy text-navy-foreground shadow-elegant">
-          <motion.img
-            src={heroImg}
-            alt="WeCare2 caregiver supporting an elderly woman at home"
-            className="absolute inset-0 size-full object-cover opacity-65 will-change-transform"
-            width={1600}
-            height={1024}
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            style={prefersReducedMotion ? undefined : { y: imageY, scale: imageScale }}
-          />
-
+        {/* Top row: navy text card + hero image */}
+        <div className="grid gap-5 lg:grid-cols-[1.05fr_1fr]">
+          {/* Left: dark text card */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/30"
-            style={prefersReducedMotion ? undefined : { opacity: overlayOpacity }}
-          />
-
-          {!prefersReducedMotion && (
-            <>
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -left-24 top-10 size-72 rounded-full opacity-60 mix-blend-screen blur-3xl animate-drift"
-                style={{ background: "radial-gradient(circle, oklch(0.62 0.215 25 / 0.55), transparent 70%)" }}
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute right-[-6rem] bottom-[-4rem] size-96 rounded-full opacity-50 mix-blend-screen blur-3xl animate-drift"
-                style={{ background: "radial-gradient(circle, oklch(0.55 0.12 250 / 0.55), transparent 70%)", animationDelay: "-6s" }}
-              />
-              <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-                {[
-                  { l: "12%", t: "22%", d: "0s",  s: "6px" },
-                  { l: "78%", t: "30%", d: "-2s", s: "4px" },
-                  { l: "40%", t: "75%", d: "-4s", s: "8px" },
-                  { l: "65%", t: "62%", d: "-1s", s: "5px" },
-                  { l: "22%", t: "60%", d: "-3s", s: "4px" },
-                  { l: "88%", t: "78%", d: "-5s", s: "7px" },
-                ].map((p, i) => (
-                  <span
-                    key={i}
-                    className="absolute rounded-full bg-white/40 animate-float"
-                    style={{ left: p.l, top: p.t, width: p.s, height: p.s, animationDelay: p.d }}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-          <div className="relative grid gap-10 px-6 py-16 sm:px-12 sm:py-24 lg:py-32">
-            <div className="max-w-3xl">
-              <motion.div initial="hidden" animate="show" custom={0} variants={fadeUp}>
-                <Eyebrow className="text-brand-red">Welcome to WeCare2</Eyebrow>
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            custom={0}
+            className="relative overflow-hidden rounded-[32px] bg-navy p-8 text-navy-foreground shadow-elegant sm:p-12 lg:p-14"
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-60"
+              style={{
+                background:
+                  "radial-gradient(700px 400px at 110% 110%, color-mix(in oklab, var(--color-brand-red) 22%, transparent), transparent 60%)",
+              }}
+            />
+            <div className="relative flex h-full flex-col">
+              <motion.div variants={fadeUp} custom={1}>
+                <Eyebrow className="text-brand-red">Discover The Power Of Premium</Eyebrow>
               </motion.div>
               <motion.h1
-                initial="hidden"
-                animate="show"
-                custom={1}
                 variants={fadeUp}
-                className="mt-5 text-balance text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl"
+                custom={2}
+                className="mt-5 text-balance text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl"
               >
-                Professional Domiciliary Care{" "}
-                <span className="display-italic text-white/95">in the comfort of your home.</span>
+                Delivering compassionate home care that honours each{" "}
+                <span className="display-italic text-white/95">individual&apos;s life journey.</span>
               </motion.h1>
               <motion.p
-                initial="hidden"
-                animate="show"
-                custom={2}
                 variants={fadeUp}
-                className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg"
-              >
-                Compassionate, reliable and personalised home care that helps individuals
-                maintain independence, dignity and quality of life — supported by a team you can trust.
-              </motion.p>
-              <motion.div
-                initial="hidden"
-                animate="show"
                 custom={3}
-                variants={fadeUp}
-                className="mt-8 flex flex-wrap gap-3"
+                className="mt-8 max-w-md text-sm leading-relaxed text-white/80 sm:text-base"
               >
-                <Button
-                  asChild
-                  size="lg"
-                  className="h-12 rounded-full bg-brand-red px-6 text-brand-red-foreground shadow-lg transition-transform hover:bg-brand-red/90 hover:scale-[1.03]"
+                At WeCare2, we understand that ageing is a deeply personal journey. That&apos;s
+                why we focus on personalised, person-centred care that nurtures mind, body and spirit.
+              </motion.p>
+
+              {/* Rotating book-appointment badge */}
+              <motion.div
+                variants={fadeUp}
+                custom={4}
+                className="mt-10 flex items-center gap-5"
+              >
+                <Link
+                  to="/contact"
+                  aria-label="Request care assessment"
+                  className="group relative grid size-28 shrink-0 place-items-center rounded-full border border-brand-red/40"
                 >
-                  <Link to="/contact">
-                    Request Care Assessment <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="h-12 rounded-full border-white/40 bg-white/0 px-6 text-white backdrop-blur transition-transform hover:bg-white/10 hover:text-white hover:scale-[1.03]"
-                >
-                  <Link to="/careers">Become A Carer</Link>
-                </Button>
+                  <svg
+                    viewBox="0 0 100 100"
+                    className={cn(
+                      "absolute inset-0 size-full text-brand-red",
+                      !prefersReducedMotion && "motion-safe:animate-[spin_18s_linear_infinite]",
+                    )}
+                    aria-hidden
+                  >
+                    <defs>
+                      <path
+                        id="hero-badge-circle"
+                        d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+                      />
+                    </defs>
+                    <text fill="currentColor" className="text-[11px] uppercase tracking-[0.18em]">
+                      <textPath href="#hero-badge-circle">
+                        Book Assessment • Book Assessment •
+                      </textPath>
+                    </text>
+                  </svg>
+                  <ArrowUpRight className="size-6 text-brand-red transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+                <div className="flex flex-col gap-2">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="h-11 rounded-full bg-brand-red px-5 text-brand-red-foreground shadow-lg hover:bg-brand-red/90"
+                  >
+                    <Link to="/contact">Request Care Assessment</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="link"
+                    className="justify-start px-0 text-white/80 hover:text-white"
+                  >
+                    <Link to="/careers">Become A Carer →</Link>
+                  </Button>
+                </div>
               </motion.div>
             </div>
+          </motion.div>
 
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.08, delayChildren: 0.5 } },
-              }}
-              className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-            >
-              {[
-                "Fully Trained Carers",
-                "Personalised Care Plans",
-                "Flexible Scheduling",
-                "24/7 Support",
-              ].map((t) => (
-                <motion.div
-                  key={t}
-                  variants={{
-                    hidden: { opacity: 0, y: 18 },
-                    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
-                  }}
-                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                  className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-medium text-white backdrop-blur"
-                >
-                  <span className="grid size-6 place-items-center rounded-full bg-brand-red">
-                    <Check className="size-3.5 text-white" />
-                  </span>
-                  {t}
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          {/* Right: hero image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease }}
+            className="relative overflow-hidden rounded-[32px] shadow-elegant min-h-[340px] lg:min-h-0"
+          >
+            <motion.img
+              src={heroImg}
+              alt="WeCare2 caregiver supporting an elderly woman at home"
+              className="absolute inset-0 size-full object-cover will-change-transform"
+              width={1600}
+              height={1024}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              style={prefersReducedMotion ? undefined : { y: imageY, scale: imageScale }}
+            />
+          </motion.div>
         </div>
+
+        {/* Bottom row: small image + working hours + (image continues visually) */}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.4 } } }}
+          className="mt-5 grid gap-5 lg:grid-cols-[1fr_1fr_1fr]"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="group relative overflow-hidden rounded-[28px] shadow-card min-h-[200px]"
+          >
+            <img
+              src={aboutImg}
+              alt="Caregiver with senior in a bright home"
+              className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              loading="lazy"
+            />
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="rounded-[28px] bg-accent p-7 text-navy shadow-card sm:p-8"
+          >
+            <h3 className="text-xl font-semibold sm:text-2xl">Working Hours</h3>
+            <p className="mt-2 max-w-xs text-sm text-navy/75">
+              We believe care should always be available — with the right people, at the right time.
+            </p>
+            <div className="my-5 h-px w-full bg-navy/15" />
+            <dl className="space-y-2 text-sm">
+              <div className="flex items-center justify-between">
+                <dt className="text-navy/80">Monday – Friday</dt>
+                <dd className="font-semibold">8:00 AM – 8:00 PM</dd>
+              </div>
+              <div className="flex items-center justify-between">
+                <dt className="text-navy/80">Saturday – Sunday</dt>
+                <dd className="font-semibold">On-Call 24/7</dd>
+              </div>
+            </dl>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="hidden rounded-[28px] bg-surface p-7 shadow-card sm:p-8 lg:block"
+          >
+            <Eyebrow>Trusted Across The UK</Eyebrow>
+            <div className="mt-4 flex items-center gap-1 text-brand-red">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="size-4 fill-current" />
+              ))}
+              <span className="ml-2 text-sm font-semibold text-navy">4.9 / 5</span>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Rated by 500+ families for compassionate, dependable home care.
+            </p>
+            <div className="mt-5 flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-navy">
+                <BadgeCheck className="size-3.5 text-brand-red" /> CQC Aligned
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-navy">
+                <ShieldCheck className="size-3.5 text-brand-red" /> DBS Checked
+              </span>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Trust bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6, ease }}
+          className="mt-5 rounded-full border border-border bg-surface px-6 py-4 shadow-soft"
+        >
+          <ul className="grid gap-4 sm:grid-cols-3">
+            {trustItems.map(({ icon: Icon, t }) => (
+              <li key={t} className="flex items-center gap-3 text-sm font-medium text-navy">
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-brand-red">
+                  <Icon className="size-4" />
+                </span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </section>
   );
