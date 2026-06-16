@@ -139,8 +139,12 @@ function Hero() {
             className="absolute inset-0 size-full object-cover opacity-65 will-change-transform"
             width={1600}
             height={1024}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             style={prefersReducedMotion ? undefined : { y: imageY, scale: imageScale }}
           />
+
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/30"
             style={prefersReducedMotion ? undefined : { opacity: overlayOpacity }}
