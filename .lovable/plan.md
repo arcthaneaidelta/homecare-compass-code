@@ -1,66 +1,110 @@
-# WeCare2 Domiciliary Care — Phase 1 Plan
+# Premium Refinement Pass — WeCare2
 
-Build the design system, site shell (header + footer), and full Home page that visually matches the existing WeCare2 site (we2care.arcthaneai.com). Forms render but are static for now. Remaining pages (About, Services, Team, Why Us, Careers, FAQ, Contact) come in follow-up phases.
+Goal: layer in calm, premium micro-interactions and depth without touching brand colors, type, layout, or content. Every effect stays subtle, accessible, and `prefers-reduced-motion` aware.
 
-## Visual identity (locked from reference)
+## 1. Global depth & motion primitives
 
-Extracted from the PDF/logo so every later phase reuses the same tokens.
+**`src/styles.css`** — extend the existing token/utility system (do not replace it):
+- New shadow tokens: `--shadow-ambient` (very soft, large radius), `--shadow-lift` (hover state, slightly stronger than `--shadow-card`).
+- New keyframes: `aurora-pan` (slow background gradient drift, 24–30s), `sheen` (one‑shot button highlight).
+- New utilities:
+  - `ambient-bg` — fixed/absolute layered radial gradients in brand-red + navy at 4–8% opacity, animated with `aurora-pan`.
+  - `section-divider` — thin gradient hairline between sections for soft separation.
+  - `card-lift` — `transition: transform, box-shadow, border-color`; on hover: `translateY(-4px)`, `--shadow-lift`, border tinted toward brand-red/15.
+  - `btn-press` — `active:scale-[0.98]`, smooth `transition-transform`.
+  - `img-zoom` — wrapper rule for `group-hover:scale-[1.03]` with longer easing.
+  - `field-focus` — input focus ring upgrade (soft brand-red ring + subtle inset shadow).
+- Wrap all new keyframes/utilities in `@media (prefers-reduced-motion: no-preference)` where they auto-run.
 
-- **Primary Navy:** deep indigo navy (~`oklch(0.22 0.08 265)`) — used for headlines, dark cards, footer.
-- **Primary Red:** vivid coral red (~`oklch(0.62 0.22 25)`) — used for top info bar, CTA buttons, eyebrow labels, accent dots, link arrows.
-- **Backgrounds:** white cards on a very soft mint/cream page background (`oklch(0.97 0.015 165)`), plus pure white for inner cards.
-- **Typography:** display serif with italic emphasis for headlines (Fraunces), clean humanist sans for body (Inter). Eyebrow labels use small uppercase red with a leading red dot.
-- **Shape language:** large 24–32px rounded cards, soft shadows, dark navy "feature" cards with red accent, watercolor/illustrated healthcare imagery.
-- **Header:** thin red top info bar (phone · email · address · socials) + white sticky main header with logo left, nav center, red pill CTA right.
-- **Footer:** dark navy, 4 columns (brand + quick links + open hours/contact + address), red divider line, copyright row.
+## 2. Ambient background system
 
-These get codified as CSS custom properties in `src/styles.css` (light + dark) and Tailwind tokens, so all later pages inherit automatically.
+**New `src/components/site/AmbientBackdrop.tsx`**
+- Fixed, `pointer-events-none`, `z -10`, `aria-hidden`.
+- 2–3 large radial gradients (brand-red ~6%, navy ~5%, warm cream ~4%) blurred and very slowly drifting via `animate-drift` / new `aurora-pan`.
+- Mounted once in `src/routes/__root.tsx` so it sits behind every page.
+- Reduced-motion: render static, no animation.
 
-## Phase 1 deliverables
+**Per-section ambience** (opt-in, very low opacity):
+- Add a single `<div className="ambient-bg">` layer inside Hero, Director's Message, Why Choose Us, Testimonials, Careers CTA on `index.tsx` and the corresponding sections in `about.tsx`, `careers.tsx`, `team.tsx`.
 
-### Site shell
-- `Header` — red top info bar, sticky white nav with all primary links (Home, About, Services dropdown with Personal/Live-In/Companionship/Respite Care, Our Team, Careers, FAQ, Contact), red "Request Care Assessment" pill CTA + outlined "Become A Carer" secondary, and a slide-out mobile sheet menu.
-- `Footer` — brand block (logo + tagline), Quick Links, Services, Contact (phone 01229846646, email admin@wecare2.co.uk, hours Mon–Sun 7am–10pm, address Clear Water Fisheries, Warton Carnforth LA6 1FQ), socials, legal row.
-- All other pages stubbed as placeholder routes so navigation works.
+## 3. Mouse-responsive lighting (very subtle)
 
-### Home page sections (matching brief order)
-1. **Hero** — illustrated carer/client imagery, eyebrow "Welcome to WeCare2", serif headline "Professional Domiciliary Care In The Comfort Of Your Home", subhead, dual CTAs, 4 trust checkmarks (Fully Trained Carers · Personalized Care Plans · Flexible Scheduling · 24/7 Support).
-2. **About Domiciliary Care** — two-column with supporting image, what it is + benefits + independence + family peace of mind, 4.9/5 rating chip + families-supported avatar stack (mirrors reference).
-3. **Services Overview** — 6 rounded service cards (Personal Care, Companionship, Medication, Meal Prep, Household, Mobility) with icon, title, copy, red arrow link.
-4. **Why Choose WeCare2** — dark navy section, 4 feature cards (Experienced Team, Personalized Plans, Flexible Packages, Reliable Support).
-5. **Director's Message** — portrait left, navy serif headline "A Personal Commitment To Exceptional Care", body, pull-quote "Exceptional care begins with genuine compassion.", signature, "Speak With Our Team" CTA, achievements strip (500+ Families, 100+ Professionals, 95% Satisfaction, Fully Qualified).
-6. **Our Values** — 5 premium cards (Compassion, Respect, Dignity, Integrity, Independence).
-7. **Care Options** — alternating image/text rows for Hourly, Overnight, Live-In, Respite.
-8. **How It Works** — 3 numbered steps (Assessment → Plan → Care).
-9. **Meet Our Care Team** — intro + 4 sample team cards highlighting DBS, training, vetting.
-10. **Compliance & Quality** — trust badges row (Safeguarding, Quality Monitoring, Standards, Training, Vetted Staff, Assessments).
-11. **Testimonials** — carousel of client/family quotes with star ratings.
-12. **Statistics** — animated counters (500+ / 100+ / 20+ / 95%).
-13. **FAQ** — accordion with 8 questions from the brief.
-14. **Career Recruitment** — large navy CTA band, 5 benefits, "Apply Now".
-15. **Contact** — two-column: caregiver image left, static form right (Name, Email, Phone, Service Required select, Message, submit shows toast).
+**New `src/components/site/AmbientCursorLight.tsx`**
+- Tracks pointer with rAF, writes `--mx` / `--my` CSS vars on `<body>`.
+- A fixed `pointer-events-none` div uses `radial-gradient(240px at var(--mx) var(--my), color-mix(... brand-red 6%), transparent 60%)`.
+- Disabled on coarse pointers and reduced motion.
+- Mounted in `__root.tsx` alongside existing `CursorFollower` (kept as-is, already subtle).
 
-### Imagery
-Generate ~8 illustrated healthcare images (hero, about, director portrait, care options, contact) in the same warm watercolor/illustration style as the reference, plus reuse the uploaded logo. Stock-photo substitutes only where illustration would slow the build.
+## 4. Section reveal animations
 
-### Behavior
-- Fully responsive, mobile-first (375px → 1440px+).
-- Smooth fade-in / scale-in entrance animations on scroll.
-- Sticky header with subtle shadow on scroll.
-- Accordion + carousel + animated counters work client-side.
-- SEO `head()` meta on every route (route-specific title, description, OG tags). Home gets the OG image.
+- Reuse the existing `Reveal` component. Audit pages and wrap any currently un-revealed blocks on:
+  - `about.tsx`, `team.tsx`, `careers.tsx`, `contact.tsx`, `faq.tsx`, and all `services.*.tsx` pages.
+- Standardize: `direction="up"`, `duration={0.7}`, staggered `delay` in 0.08–0.12s steps for sibling cards.
+- Grids (service cards, value cards, trust indicators, team) get a stagger wrapper instead of per-child delays.
 
-### Out of scope for Phase 1
-- About, Services (individual + sub-service pages), Our Team, Why Choose Us, Careers, FAQ, Contact full pages — stubbed only.
-- Backend / form submission — forms are static, toast on submit.
-- CMS, blog, multi-language.
+## 5. Card hover system
 
-## Technical notes
-- TanStack Start file-based routes under `src/routes/`: `index.tsx` (full Home), plus stub routes for `about`, `services`, `services.personal-care`, `services.live-in-care`, `services.companionship-care`, `services.respite-care`, `team`, `careers`, `faq`, `contact`.
-- Design tokens in `src/styles.css` via `@theme inline` (navy, red, mint surface, card, foreground, muted, ring, radius scale, shadow-elegant, gradient-hero).
-- Fraunces + Inter loaded via `<link>` in `__root.tsx` head, registered as `--font-display` / `--font-sans` tokens.
-- Shared components: `SiteHeader`, `SiteFooter`, `SectionEyebrow`, `ServiceCard`, `ValueCard`, `StepCard`, `StatCounter`, `TestimonialCarousel`, `FAQAccordion`, `ContactForm`. All consume tokens — no hardcoded hex.
-- Logo (`imgi_1_logo-removebg-preview.png`) registered via lovable-assets and used in header + footer.
-- All shadcn primitives reused (Accordion, Carousel, Sheet, Button, Input, Textarea, Select, Sonner toast).
+Apply `card-lift` utility (plus existing classes) to:
+- Service cards (`services.tsx`, `index.tsx` care options)
+- Value / "Why Choose Us" cards
+- Team cards (`team.tsx`)
+- Testimonial cards
+- Trust indicator tiles
 
-After you approve I'll execute Phase 1, then we'll iterate page-by-page on the remaining sections.
+Effect: `translateY(-4px)`, shadow upgrade, border tint, image inside scales to 1.03 via `img-zoom`. No scale on the card itself.
+
+## 6. Buttons
+
+- Extend `src/components/ui/button.tsx` default/primary variants with: `transition-all duration-300`, `active:scale-[0.98]`, soft shadow on hover, optional `hover-shimmer` only on the two key CTAs (`Request Care Assessment`, `Become A Carer`, `Apply Now`). Keep existing `cta-glow` usage but tone radius/opacity down if too strong.
+- No color/scheme changes.
+
+## 7. Imagery
+
+- Hero image already has parallax — verify timing feels calm (tighten range if needed).
+- Director portrait, service images, caregiver images: wrap in `overflow-hidden rounded-*` container and add `img-zoom` for 700ms ease hover zoom.
+- Add gentle on-scroll parallax (`useScroll` + `useTransform`, ~15px range) for the Director portrait and the About hero image only — keep cards static.
+
+## 8. Statistics
+
+- `StatCounter.tsx`: confirm it animates on in-view; add easing curve `[0.22,1,0.36,1]`, 1.6s duration, and a `Reveal` wrapper with stagger across the four stats.
+
+## 9. Testimonials
+
+- If using a carousel: add fade + slight slide transition between slides, soft card elevation on the active slide. Touch/swipe already supported by the existing carousel primitive — verify enabled.
+
+## 10. Header
+
+**`SiteHeader.tsx`**
+- On scroll past 8px (already tracked): also reduce nav height from 72px → 64px, strengthen `backdrop-blur` and add `--shadow-soft`. Transition 400ms.
+- Keep all existing structure, colors, links.
+
+## 11. Scroll experience
+
+- `html { scroll-behavior: smooth }` already set — leave native.
+- No scroll hijacking. Just ensure section padding and reveal thresholds feel consistent.
+
+## 12. Forms
+
+- `contact.tsx` and any assessment form: apply `field-focus` utility to `Input`, `Textarea`, `Select` via a small className addition on the form fields (no component API change). Add `transition-colors` on labels, soft success/error states using existing `--destructive` and a new `--success` token-less inline class only if needed (prefer existing tokens).
+
+## 13. Subtle texture
+
+- Add a single SVG noise overlay (`opacity-[0.025]`, `mix-blend-multiply`, fixed) inside `AmbientBackdrop` for premium grain. No patterned imagery.
+
+## 14. Accessibility
+
+- Every new keyframe-driven utility wrapped in `prefers-reduced-motion: no-preference`.
+- `AmbientCursorLight` and `CursorFollower` early-return on reduced motion / coarse pointer (already true for cursor follower).
+- No animations on focus rings; focus visible kept crisp.
+- No color-only state; contrast unchanged.
+
+## Files touched
+
+- Edit: `src/styles.css`, `src/routes/__root.tsx`, `src/components/site/SiteHeader.tsx`, `src/components/ui/button.tsx`, `src/components/site/StatCounter.tsx`, `src/routes/index.tsx`, `src/routes/about.tsx`, `src/routes/team.tsx`, `src/routes/careers.tsx`, `src/routes/contact.tsx`, `src/routes/faq.tsx`, `src/routes/services.tsx`, `src/routes/services.*.tsx`.
+- Create: `src/components/site/AmbientBackdrop.tsx`, `src/components/site/AmbientCursorLight.tsx`.
+
+## Out of scope
+
+- No changes to colors, fonts, copy, layout, routes, or data.
+- No new dependencies (framer-motion already present).
+- No redesign of any component shell.
