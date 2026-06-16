@@ -674,55 +674,12 @@ function Stats() {
             { to: 20, suffix: "+", label: "Service Areas" },
             { to: 95, suffix: "%", label: "Satisfaction Rate" },
           ].map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="font-display text-5xl font-medium text-white sm:text-6xl">
-                <InvertedCounter {...s} />
-              </div>
-            </div>
+            <StatCounter key={s.label} {...s} inverted />
           ))}
         </div>
       </div>
     </section>
   );
-}
-
-function InvertedCounter({ to, suffix, label }: { to: number; suffix: string; label: string }) {
-  return (
-    <div className="text-white">
-      <StatCounterInverted to={to} suffix={suffix} />
-      <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/70">{label}</div>
-    </div>
-  );
-}
-
-function StatCounterInverted({ to, suffix }: { to: number; suffix: string }) {
-  // Reuse StatCounter behaviour but rendered with white text via wrapper.
-  return (
-    <span className="inline-block">
-      <StatCounterInner to={to} suffix={suffix} />
-    </span>
-  );
-}
-
-function StatCounterInner({ to, suffix }: { to: number; suffix: string }) {
-  const [value, setValue] = useState(0);
-  const ref = useState<HTMLSpanElement | null>(null);
-  // simple effect via useState fallback — use IntersectionObserver
-  // but to keep things simple inline:
-  // we'll just animate on mount when in viewport via small effect:
-  useState(() => {
-    let frame = 0;
-    const start = performance.now();
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / 1600);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setValue(Math.round(eased * to));
-      if (p < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  });
-  return <span ref={ref[1] as any}>{value}<span className="text-brand-red">{suffix}</span></span>;
 }
 
 /* ---------------- FAQ ---------------- */

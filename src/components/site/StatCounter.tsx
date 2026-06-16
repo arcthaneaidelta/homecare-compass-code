@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function StatCounter({
   to,
   suffix = "",
   label,
   duration = 1600,
+  inverted = false,
 }: {
   to: number;
   suffix?: string;
   label: string;
   duration?: number;
+  inverted?: boolean;
 }) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -40,11 +43,13 @@ export function StatCounter({
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-display text-5xl font-medium text-navy sm:text-6xl">
+      <div className={cn("font-display text-5xl font-medium sm:text-6xl", inverted ? "text-white" : "text-navy")}>
         {value}
         <span className="text-brand-red">{suffix}</span>
       </div>
-      <div className="mt-2 text-sm font-medium text-muted-foreground">{label}</div>
+      <div className={cn("mt-2 text-sm font-medium uppercase tracking-wider", inverted ? "text-white/70" : "text-muted-foreground")}>
+        {label}
+      </div>
     </div>
   );
 }
