@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Check, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "./PageHero";
 import { CtaBand } from "./CtaBand";

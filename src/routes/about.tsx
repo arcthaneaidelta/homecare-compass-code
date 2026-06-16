@@ -1,6 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
-  ArrowUpRight,
   HeartHandshake,
   ShieldCheck,
   Sparkles,
@@ -10,7 +9,6 @@ import {
   Award,
   Clock,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
