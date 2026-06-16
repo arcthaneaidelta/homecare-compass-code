@@ -80,7 +80,6 @@ function HomePage() {
       <Reveal><HowItWorks /></Reveal>
       <Reveal><StatsBand /></Reveal>
       <Reveal><ConsultationCta /></Reveal>
-      <Reveal><PricingPlans /></Reveal>
       <Reveal><FeatureHighlights /></Reveal>
       <Reveal><TestimonialsSection /></Reveal>
       <Reveal><FaqSection /></Reveal>
@@ -784,99 +783,6 @@ function ConsultationCta() {
   );
 }
 
-/* ---------------- Pricing ---------------- */
-const PLANS = [
-  {
-    name: "Hourly Care",
-    blurb: "Flexible visits when you need them",
-    price: "From £24",
-    unit: "/ hour",
-    features: ["Minimum 1-hour visits", "Personal & companionship care", "Medication prompts", "Family update notes"],
-    highlight: false,
-  },
-  {
-    name: "Daily Care",
-    blurb: "Full daytime support, every day",
-    price: "From £180",
-    unit: "/ day",
-    features: ["Up to 10 hours of care daily", "Personal care & meals", "Mobility & errands", "Same familiar carers"],
-    highlight: true,
-  },
-  {
-    name: "Live-In Care",
-    blurb: "24-hour dedicated home care",
-    price: "From £1,150",
-    unit: "/ week",
-    features: ["A carer who lives with you", "24-hour reassurance", "Personal & specialist care", "Family portal access"],
-    highlight: false,
-  },
-];
-function PricingPlans() {
-  return (
-    <section className="bg-surface py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <Eyebrow className="justify-center">Pricing Plan</Eyebrow>
-          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl">
-            Home care plans that offer{" "}
-            <span className="display-italic text-brand-red">real value.</span>
-          </h2>
-        </div>
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {PLANS.map((p) => (
-            <div
-              key={p.name}
-              className={cn(
-                "card-lift relative flex flex-col rounded-3xl border p-8 shadow-soft",
-                p.highlight
-                  ? "border-transparent bg-navy text-white"
-                  : "border-border bg-card",
-              )}
-            >
-              {p.highlight && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-red px-4 py-1 text-xs font-semibold uppercase tracking-wider text-brand-red-foreground shadow-card">
-                  Most Popular
-                </span>
-              )}
-              <h3 className={cn("text-2xl font-semibold", p.highlight ? "text-white" : "text-navy")}>{p.name}</h3>
-              <p className={cn("mt-1 text-sm", p.highlight ? "text-white/70" : "text-muted-foreground")}>
-                {p.blurb}
-              </p>
-              <div className="mt-6 flex items-baseline gap-1">
-                <span className={cn("font-display text-4xl font-medium", p.highlight ? "text-white" : "text-navy")}>{p.price}</span>
-                <span className={cn("text-sm", p.highlight ? "text-white/60" : "text-muted-foreground")}>{p.unit}</span>
-              </div>
-              <ul className={cn("mt-6 space-y-3 text-sm", p.highlight ? "text-white/85" : "text-foreground")}>
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3">
-                    <span className={cn(
-                      "mt-0.5 grid size-5 shrink-0 place-items-center rounded-full",
-                      p.highlight ? "bg-brand-red text-brand-red-foreground" : "bg-accent text-brand-red",
-                    )}>
-                      <Check className="size-3" />
-                    </span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                asChild
-                className={cn(
-                  "mt-8 h-11 rounded-full",
-                  p.highlight
-                    ? "bg-brand-red text-brand-red-foreground hover:bg-brand-red/90"
-                    : "bg-navy text-navy-foreground hover:bg-navy/90",
-                )}
-              >
-                <Link to="/contact">Get Started <ArrowUpRight className="size-4" /></Link>
-              </Button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ---------------- Feature Highlights ---------------- */
 const FEATURES = [
