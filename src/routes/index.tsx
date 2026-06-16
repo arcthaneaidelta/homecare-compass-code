@@ -237,11 +237,11 @@ function AboutDomiciliary() {
     <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <div className="relative">
-          <div className="overflow-hidden rounded-[32px] shadow-card">
+          <div className="group overflow-hidden rounded-[32px] shadow-card">
             <img
               src={aboutImg}
               alt="Elderly man reading while caregiver brings tea"
-              className="size-full object-cover"
+              className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               width={1200}
               height={1200}
               loading="lazy"
