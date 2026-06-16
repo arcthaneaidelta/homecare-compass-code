@@ -3,7 +3,7 @@ import { ShieldCheck, GraduationCap, BadgeCheck, ClipboardCheck } from "lucide-r
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import directorImg from "@/assets/director-portrait.jpg";
+import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
 
 export const Route = createFileRoute("/team")({
   head: () => ({
@@ -12,14 +12,14 @@ export const Route = createFileRoute("/team")({
       { name: "description", content: "Meet the trained, DBS-checked carers and coordinators behind WeCare2 — the people delivering care every day." },
       { property: "og:title", content: "Meet The WeCare2 Care Team" },
       { property: "og:description", content: "Trained, vetted, and chosen for kindness as much as skill." },
-      { property: "og:image", content: directorImg },
+      { property: "og:image", content: masonWardImg.url },
     ],
   }),
   component: TeamPage,
 });
 
 const LEADERS = [
-  { name: "Sarah Whitfield", role: "Director of Care", bio: "Registered nurse with 20+ years in nursing and care home leadership." },
+  { name: "Mason Ward", role: "Director of Care", bio: "Experienced care leader and founder of WeCare2, committed to compassionate, person-centred home care across the UK." },
   { name: "James O'Connor", role: "Operations Manager", bio: "Leads our coordinator and quality teams across the North West." },
   { name: "Priya Shah", role: "Lead Care Coordinator", bio: "Matches carers to clients and oversees personalised care planning." },
   { name: "Daniel Brooks", role: "Recruitment & Training Lead", bio: "Designs our induction, shadow shifts and ongoing development programme." },
@@ -47,7 +47,7 @@ function TeamPage() {
         title="The people behind"
         italic="every visit."
         description="Carefully selected, fully trained, and chosen for kindness as much as skill. Meet the coordinators and carers delivering WeCare2's care across the UK."
-        image={directorImg}
+        image={masonWardImg.url}
         crumbs={[{ label: "Our Team" }]}
       />
 
