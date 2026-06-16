@@ -87,8 +87,10 @@ export function SiteHeader() {
       {/* Main nav */}
       <div
         className={cn(
-          "border-b border-border/60 bg-card/95 backdrop-blur transition-shadow",
-          scrolled && "shadow-soft",
+          "border-b transition-all duration-500",
+          scrolled
+            ? "border-border/60 bg-card/70 shadow-soft backdrop-blur-xl supports-[backdrop-filter]:bg-card/55"
+            : "border-transparent bg-card/95 backdrop-blur",
         )}
       >
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
@@ -209,11 +211,15 @@ function NavLink({ to, label }: { to: string; label: string }) {
   return (
     <Link
       to={to}
-      className="rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-brand-red"
+      className="group relative rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-brand-red"
       activeProps={{ className: "text-brand-red" }}
       activeOptions={{ exact: to === "/" }}
     >
-      {label}
+      <span>{label}</span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-3 -bottom-0.5 h-px origin-right scale-x-0 bg-brand-red transition-transform duration-400 ease-out group-hover:origin-left group-hover:scale-x-100"
+      />
     </Link>
   );
 }

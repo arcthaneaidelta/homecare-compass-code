@@ -149,6 +149,37 @@ function Hero() {
             className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/30"
             style={prefersReducedMotion ? undefined : { opacity: overlayOpacity }}
           />
+
+          {!prefersReducedMotion && (
+            <>
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -left-24 top-10 size-72 rounded-full opacity-60 mix-blend-screen blur-3xl animate-drift"
+                style={{ background: "radial-gradient(circle, oklch(0.62 0.215 25 / 0.55), transparent 70%)" }}
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute right-[-6rem] bottom-[-4rem] size-96 rounded-full opacity-50 mix-blend-screen blur-3xl animate-drift"
+                style={{ background: "radial-gradient(circle, oklch(0.55 0.12 250 / 0.55), transparent 70%)", animationDelay: "-6s" }}
+              />
+              <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+                {[
+                  { l: "12%", t: "22%", d: "0s",  s: "6px" },
+                  { l: "78%", t: "30%", d: "-2s", s: "4px" },
+                  { l: "40%", t: "75%", d: "-4s", s: "8px" },
+                  { l: "65%", t: "62%", d: "-1s", s: "5px" },
+                  { l: "22%", t: "60%", d: "-3s", s: "4px" },
+                  { l: "88%", t: "78%", d: "-5s", s: "7px" },
+                ].map((p, i) => (
+                  <span
+                    key={i}
+                    className="absolute rounded-full bg-white/40 animate-float"
+                    style={{ left: p.l, top: p.t, width: p.s, height: p.s, animationDelay: p.d }}
+                  />
+                ))}
+              </div>
+            </>
+          )}
           <div className="relative grid gap-10 px-6 py-16 sm:px-12 sm:py-24 lg:py-32">
             <div className="max-w-3xl">
               <motion.div initial="hidden" animate="show" custom={0} variants={fadeUp}>
