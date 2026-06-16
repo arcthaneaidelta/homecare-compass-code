@@ -143,6 +143,12 @@
   0%   { transform: translateX(-120%); }
   100% { transform: translateX(220%); }
 }
+@keyframes aurora {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  33%  { transform: translate3d(3%,-2%,0) scale(1.06); }
+  66%  { transform: translate3d(-2%,3%,0) scale(0.98); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
 
 @layer base {
   * {
@@ -209,6 +215,61 @@
 }
 @utility animate-drift {
   animation: drift 14s ease-in-out infinite;
+}
+@utility animate-aurora {
+  animation: aurora 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility card-lift {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px -22px color-mix(in oklab, var(--color-navy) 32%, transparent);
+    border-color: color-mix(in oklab, var(--color-brand-red) 22%, var(--color-border));
+  }
+}
+
+@utility img-zoom {
+  overflow: hidden;
+  & img {
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+    will-change: transform;
+  }
+  &:hover img {
+    transform: scale(1.04);
+  }
+}
+
+@utility btn-press {
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+  &:active { transform: scale(0.98); }
+}
+
+@utility field-focus {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  &:focus-visible {
+    box-shadow:
+      0 0 0 3px color-mix(in oklab, var(--color-brand-red) 18%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--color-brand-red) 8%, transparent);
+    border-color: color-mix(in oklab, var(--color-brand-red) 45%, var(--color-border));
+  }
+}
+
+@utility section-divider {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-navy) 14%, transparent), transparent);
+    pointer-events: none;
+  }
 }
 
 @utility link-underline {
