@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PageHero } from "@/components/site/PageHero";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import img from "@/assets/contact-carer.jpg";
+import img from "@/assets/contact-carer.webp";
 
 export const Route = createFileRoute("/careers")({
   head: () => ({

@@ -50,14 +50,14 @@ import { Eyebrow } from "@/components/site/Eyebrow";
 import { StatCounter } from "@/components/site/StatCounter";
 import { cn } from "@/lib/utils";
 
-import heroImg from "@/assets/hero-domiciliary.jpg";
-import aboutImg from "@/assets/about-care.jpg";
+import heroImg from "@/assets/hero-domiciliary.webp";
+import aboutImg from "@/assets/about-care.webp";
 import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
-import hourlyImg from "@/assets/care-hourly.jpg";
-import overnightImg from "@/assets/care-overnight.jpg";
-import liveinImg from "@/assets/care-livein.jpg";
-import respiteImg from "@/assets/care-respite.jpg";
-import contactImg from "@/assets/contact-carer.jpg";
+import hourlyImg from "@/assets/care-hourly.webp";
+import overnightImg from "@/assets/care-overnight.webp";
+import liveinImg from "@/assets/care-livein.webp";
+import respiteImg from "@/assets/care-respite.webp";
+import contactImg from "@/assets/contact-carer.webp";
 
 
 export const Route = createFileRoute("/")({
