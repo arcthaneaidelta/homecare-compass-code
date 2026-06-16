@@ -50,12 +50,13 @@ import { cn } from "@/lib/utils";
 
 import heroImg from "@/assets/hero-domiciliary.jpg";
 import aboutImg from "@/assets/about-care.jpg";
-import directorImg from "@/assets/director-portrait.jpg";
+import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
 import hourlyImg from "@/assets/care-hourly.jpg";
 import overnightImg from "@/assets/care-overnight.jpg";
 import liveinImg from "@/assets/care-livein.jpg";
 import respiteImg from "@/assets/care-respite.jpg";
 import contactImg from "@/assets/contact-carer.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -338,8 +339,8 @@ function DirectorMessage() {
           <div className="relative">
             <div className="overflow-hidden rounded-[32px] shadow-elegant">
               <img
-                src={directorImg}
-                alt="WeCare2 Director portrait"
+                src={masonWardImg.url}
+                alt="Mason Ward, Director of Care at WeCare2"
                 className="size-full object-cover"
                 width={1024}
                 height={1280}
@@ -375,7 +376,7 @@ function DirectorMessage() {
 
             <div className="mt-8 flex items-end gap-4">
               <div>
-                <p className="font-display text-2xl italic text-navy">Sarah Whitfield</p>
+                <p className="font-display text-2xl italic text-navy">Mason Ward</p>
                 <p className="text-sm text-muted-foreground">Director of Care, WeCare2</p>
               </div>
               <Button asChild className="ml-auto h-11 rounded-full bg-brand-red px-5 text-brand-red-foreground hover:bg-brand-red/90">
