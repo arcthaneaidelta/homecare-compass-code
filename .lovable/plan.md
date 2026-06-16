@@ -1,110 +1,57 @@
-# Premium Refinement Pass — WeCare2
+# Homepage Rebuild — Carely Layout, WeCare2 Brand
 
-Goal: layer in calm, premium micro-interactions and depth without touching brand colors, type, layout, or content. Every effect stays subtle, accessible, and `prefers-reduced-motion` aware.
+Replace the current `src/routes/index.tsx` homepage with a section-for-section reconstruction of the Carely reference (`demo.awaikenthemes.com/carely/index.html`), keeping our existing WeCare2 colors, fonts, content, and images. The header, footer, ambient backdrop, cursor system, and global tokens stay exactly as they are.
 
-## 1. Global depth & motion primitives
+## Section order (matching the reference exactly)
 
-**`src/styles.css`** — extend the existing token/utility system (do not replace it):
-- New shadow tokens: `--shadow-ambient` (very soft, large radius), `--shadow-lift` (hover state, slightly stronger than `--shadow-card`).
-- New keyframes: `aurora-pan` (slow background gradient drift, 24–30s), `sheen` (one‑shot button highlight).
-- New utilities:
-  - `ambient-bg` — fixed/absolute layered radial gradients in brand-red + navy at 4–8% opacity, animated with `aurora-pan`.
-  - `section-divider` — thin gradient hairline between sections for soft separation.
-  - `card-lift` — `transition: transform, box-shadow, border-color`; on hover: `translateY(-4px)`, `--shadow-lift`, border tinted toward brand-red/15.
-  - `btn-press` — `active:scale-[0.98]`, smooth `transition-transform`.
-  - `img-zoom` — wrapper rule for `group-hover:scale-[1.03]` with longer easing.
-  - `field-focus` — input focus ring upgrade (soft brand-red ring + subtle inset shadow).
-- Wrap all new keyframes/utilities in `@media (prefers-reduced-motion: no-preference)` where they auto-run.
+1. **Hero** — large H1 left, hero image right, "Discover The Power Of Premium" rotating badge over image, dual CTA buttons, working-hours card.
+2. **Trust / Feature strip** — three small icon cards: "Family-Like Bonds", "Comfort That Never Compromises on Dignity", "Every Detail Designed with Seniors in Mind".
+3. **About Us** — eyebrow "About Us", H2 "Dedicated to compassionate domiciliary care…", two stacked images (one offset), bullet list with check icons, signature/CTA row.
+4. **Our Services** — eyebrow "Our Services", H2, 5 service cards in an asymmetric grid (large left card + 4 smaller right) mapping to our services: Personal Care, Live-In Care, Companionship, Respite, Overnight/Dementia.
+5. **Service CTA banner** — "Ready to start your journey…" full-width image band with overlay text and circular CTA button.
+6. **Why Choose Us** — eyebrow, H2, left image + right list of 3 reasons with numbered icons (Compassionate Staff, State-of-the-Art Service, Holistic Approach).
+7. Directors Message -- same as of now. 
+8. **How It Works** — 4-step horizontal timeline with connector line: Free Consultation, Caregiver Matching, Ongoing Support, Regular Check-ins.
+9. **Stats / Our Facts** — dark navy band with 4 animated counters (reuse `StatCounter`): Happy Clients, Years Experience, Carers, Hours of Care.
+10. **Consultation CTA** — split layout: left image, right form/CTA "Schedule a personalized assessment".
+11. **Features highlight** — "Designed for comfort and everyday living" with icon grid (4 items).
+12. **Testimonials** — large 4.9 rating block on left, testimonial carousel/cards on right.
+13. **FAQ** — accordion of 5–6 questions, left intro column + right accordion.
+14. **Reviews strip** — small marquee/grid of 3 short review quotes with avatars.
+15. **Blog teaser** — 3 article cards with image, date, title, "Read more" link.
+16. **Final CTA Band** — reuse existing `CtaBand` component.
 
-## 2. Ambient background system
+## Animation & interaction parity
 
-**New `src/components/site/AmbientBackdrop.tsx`**
-- Fixed, `pointer-events-none`, `z -10`, `aria-hidden`.
-- 2–3 large radial gradients (brand-red ~6%, navy ~5%, warm cream ~4%) blurred and very slowly drifting via `animate-drift` / new `aurora-pan`.
-- Mounted once in `src/routes/__root.tsx` so it sits behind every page.
-- Reduced-motion: render static, no animation.
+Match the reference site's motion vocabulary using our existing libraries (framer-motion + Tailwind utilities already wired):
 
-**Per-section ambience** (opt-in, very low opacity):
-- Add a single `<div className="ambient-bg">` layer inside Hero, Director's Message, Why Choose Us, Testimonials, Careers CTA on `index.tsx` and the corresponding sections in `about.tsx`, `careers.tsx`, `team.tsx`.
+- **Reveal on scroll** — reuse `Reveal` for every section heading, paragraph, and card grid with staggered delays (0, 0.08, 0.16…).
+- **Image parallax** — hero image and about images use `useScroll` + `useTransform` for subtle Y translate + scale (already pattern in Hero).
+- **Rotating badge** — keep current `spin` animation on "Discover The Power Of Premium" disc badge; also apply to service CTA circular button.
+- **Card hover** — translate-y -4px, shadow lift, border tint to brand-red, icon scale 1.1 + 6deg rotate (extend existing `card-lift` utility).
+- **Image hover zoom** — service/blog images use `img-zoom` (internal `scale-105` on hover, overflow hidden).
+- **Number counters** — `StatCounter` IntersectionObserver count-up (already implemented).
+- **Accordion** — shadcn `Accordion` with smooth height + chevron rotation.
+- **Marquee** — testimonials/reviews use CSS `@keyframes` horizontal scroll with `motion-safe` guard.
+- **Button micro-press** — existing `active:scale-[0.98]` from `buttonVariants`.
+- **prefers-reduced-motion** honored everywhere via `useReducedMotion` and `motion-safe:` utilities.
 
-## 3. Mouse-responsive lighting (very subtle)
+## Brand mapping (no color/font changes)
 
-**New `src/components/site/AmbientCursorLight.tsx`**
-- Tracks pointer with rAF, writes `--mx` / `--my` CSS vars on `<body>`.
-- A fixed `pointer-events-none` div uses `radial-gradient(240px at var(--mx) var(--my), color-mix(... brand-red 6%), transparent 60%)`.
-- Disabled on coarse pointers and reduced motion.
-- Mounted in `__root.tsx` alongside existing `CursorFollower` (kept as-is, already subtle).
+- Reference orange/green → our `brand-red` and `navy`.
+- Reference cream sections → our `bg-surface` / `bg-accent`.
+- Reference Plus Jakarta Sans / Lora → keep our existing display + body fonts.
+- All images reuse current `src/assets/*.webp` (about-care, care-hourly, care-livein, care-overnight, care-respite, contact-carer, director-portrait, hero-domiciliary).
 
-## 4. Section reveal animations
+## Files
 
-- Reuse the existing `Reveal` component. Audit pages and wrap any currently un-revealed blocks on:
-  - `about.tsx`, `team.tsx`, `careers.tsx`, `contact.tsx`, `faq.tsx`, and all `services.*.tsx` pages.
-- Standardize: `direction="up"`, `duration={0.7}`, staggered `delay` in 0.08–0.12s steps for sibling cards.
-- Grids (service cards, value cards, trust indicators, team) get a stagger wrapper instead of per-child delays.
-
-## 5. Card hover system
-
-Apply `card-lift` utility (plus existing classes) to:
-- Service cards (`services.tsx`, `index.tsx` care options)
-- Value / "Why Choose Us" cards
-- Team cards (`team.tsx`)
-- Testimonial cards
-- Trust indicator tiles
-
-Effect: `translateY(-4px)`, shadow upgrade, border tint, image inside scales to 1.03 via `img-zoom`. No scale on the card itself.
-
-## 6. Buttons
-
-- Extend `src/components/ui/button.tsx` default/primary variants with: `transition-all duration-300`, `active:scale-[0.98]`, soft shadow on hover, optional `hover-shimmer` only on the two key CTAs (`Request Care Assessment`, `Become A Carer`, `Apply Now`). Keep existing `cta-glow` usage but tone radius/opacity down if too strong.
-- No color/scheme changes.
-
-## 7. Imagery
-
-- Hero image already has parallax — verify timing feels calm (tighten range if needed).
-- Director portrait, service images, caregiver images: wrap in `overflow-hidden rounded-*` container and add `img-zoom` for 700ms ease hover zoom.
-- Add gentle on-scroll parallax (`useScroll` + `useTransform`, ~15px range) for the Director portrait and the About hero image only — keep cards static.
-
-## 8. Statistics
-
-- `StatCounter.tsx`: confirm it animates on in-view; add easing curve `[0.22,1,0.36,1]`, 1.6s duration, and a `Reveal` wrapper with stagger across the four stats.
-
-## 9. Testimonials
-
-- If using a carousel: add fade + slight slide transition between slides, soft card elevation on the active slide. Touch/swipe already supported by the existing carousel primitive — verify enabled.
-
-## 10. Header
-
-**`SiteHeader.tsx`**
-- On scroll past 8px (already tracked): also reduce nav height from 72px → 64px, strengthen `backdrop-blur` and add `--shadow-soft`. Transition 400ms.
-- Keep all existing structure, colors, links.
-
-## 11. Scroll experience
-
-- `html { scroll-behavior: smooth }` already set — leave native.
-- No scroll hijacking. Just ensure section padding and reveal thresholds feel consistent.
-
-## 12. Forms
-
-- `contact.tsx` and any assessment form: apply `field-focus` utility to `Input`, `Textarea`, `Select` via a small className addition on the form fields (no component API change). Add `transition-colors` on labels, soft success/error states using existing `--destructive` and a new `--success` token-less inline class only if needed (prefer existing tokens).
-
-## 13. Subtle texture
-
-- Add a single SVG noise overlay (`opacity-[0.025]`, `mix-blend-multiply`, fixed) inside `AmbientBackdrop` for premium grain. No patterned imagery.
-
-## 14. Accessibility
-
-- Every new keyframe-driven utility wrapped in `prefers-reduced-motion: no-preference`.
-- `AmbientCursorLight` and `CursorFollower` early-return on reduced motion / coarse pointer (already true for cursor follower).
-- No animations on focus rings; focus visible kept crisp.
-- No color-only state; contrast unchanged.
-
-## Files touched
-
-- Edit: `src/styles.css`, `src/routes/__root.tsx`, `src/components/site/SiteHeader.tsx`, `src/components/ui/button.tsx`, `src/components/site/StatCounter.tsx`, `src/routes/index.tsx`, `src/routes/about.tsx`, `src/routes/team.tsx`, `src/routes/careers.tsx`, `src/routes/contact.tsx`, `src/routes/faq.tsx`, `src/routes/services.tsx`, `src/routes/services.*.tsx`.
-- Create: `src/components/site/AmbientBackdrop.tsx`, `src/components/site/AmbientCursorLight.tsx`.
+- **Edit** `src/routes/index.tsx` — replace all section components below `Hero` (keep `Route` export, meta, `HomePage` shell). Hero gets minor tweaks to match the badge placement exactly.
+- **Edit** `src/styles.css` — add `@keyframes marquee` + `.animate-marquee` utility and any small helpers (`.img-zoom`, `.step-connector`) if missing.
+- **No** changes to header, footer, root layout, routing, or other routes.
 
 ## Out of scope
 
-- No changes to colors, fonts, copy, layout, routes, or data.
-- No new dependencies (framer-motion already present).
-- No redesign of any component shell.
+- No color palette, typography, or design-token changes.
+- No content rewrites beyond what's needed to fill the new section structure (uses existing copy where it fits, paraphrased domiciliary-care text otherwise).
+- No new dependencies.
+- No backend, routing, or data-layer work.
