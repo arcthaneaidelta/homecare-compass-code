@@ -87,13 +87,18 @@ export function SiteHeader() {
       {/* Main nav */}
       <div
         className={cn(
-          "border-b transition-all duration-500",
+          "border-b transition-all duration-500 ease-out",
           scrolled
             ? "border-border/60 bg-card/70 shadow-soft backdrop-blur-xl supports-[backdrop-filter]:bg-card/55"
             : "border-transparent bg-card/95 backdrop-blur",
         )}
       >
-        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div
+          className={cn(
+            "mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-400 ease-out sm:px-6",
+            scrolled ? "h-[60px]" : "h-[72px]",
+          )}
+        >
           <Link to="/" className="flex items-center gap-3 shrink-0">
             <img src={logoAsset.url} alt="WeCare2" className="h-11 w-auto" width={120} height={44} />
             <span className="hidden flex-col leading-tight sm:flex">

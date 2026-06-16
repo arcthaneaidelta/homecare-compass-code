@@ -369,9 +369,9 @@ function ServicesOverview() {
             <Link
               key={title}
               to={to}
-              className="group flex flex-col gap-4 rounded-3xl border border-border bg-card p-7 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-red/30 hover:shadow-card"
+              className="card-lift group flex flex-col gap-4 rounded-3xl border border-border bg-card p-7 shadow-soft"
             >
-              <span className="grid size-12 place-items-center rounded-2xl bg-accent text-brand-red">
+              <span className="grid size-12 place-items-center rounded-2xl bg-accent text-brand-red transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
                 <Icon className="size-6" />
               </span>
               <h3 className="text-xl font-semibold text-navy">{title}</h3>
