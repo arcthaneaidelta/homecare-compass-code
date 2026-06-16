@@ -9,38 +9,211 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesRespiteCareRouteImport } from './routes/services.respite-care'
+import { Route as ServicesPersonalCareRouteImport } from './routes/services.personal-care'
+import { Route as ServicesLiveInCareRouteImport } from './routes/services.live-in-care'
+import { Route as ServicesCompanionshipCareRouteImport } from './routes/services.companionship-care'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRespiteCareRoute = ServicesRespiteCareRouteImport.update({
+  id: '/respite-care',
+  path: '/respite-care',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesPersonalCareRoute = ServicesPersonalCareRouteImport.update({
+  id: '/personal-care',
+  path: '/personal-care',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesLiveInCareRoute = ServicesLiveInCareRouteImport.update({
+  id: '/live-in-care',
+  path: '/live-in-care',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesCompanionshipCareRoute =
+  ServicesCompanionshipCareRouteImport.update({
+    id: '/companionship-care',
+    path: '/companionship-care',
+    getParentRoute: () => ServicesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/team': typeof TeamRoute
+  '/services/companionship-care': typeof ServicesCompanionshipCareRoute
+  '/services/live-in-care': typeof ServicesLiveInCareRoute
+  '/services/personal-care': typeof ServicesPersonalCareRoute
+  '/services/respite-care': typeof ServicesRespiteCareRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/team': typeof TeamRoute
+  '/services/companionship-care': typeof ServicesCompanionshipCareRoute
+  '/services/live-in-care': typeof ServicesLiveInCareRoute
+  '/services/personal-care': typeof ServicesPersonalCareRoute
+  '/services/respite-care': typeof ServicesRespiteCareRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/team': typeof TeamRoute
+  '/services/companionship-care': typeof ServicesCompanionshipCareRoute
+  '/services/live-in-care': typeof ServicesLiveInCareRoute
+  '/services/personal-care': typeof ServicesPersonalCareRoute
+  '/services/respite-care': typeof ServicesRespiteCareRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/contact'
+    | '/faq'
+    | '/services'
+    | '/team'
+    | '/services/companionship-care'
+    | '/services/live-in-care'
+    | '/services/personal-care'
+    | '/services/respite-care'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/contact'
+    | '/faq'
+    | '/services'
+    | '/team'
+    | '/services/companionship-care'
+    | '/services/live-in-care'
+    | '/services/personal-care'
+    | '/services/respite-care'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/contact'
+    | '/faq'
+    | '/services'
+    | '/team'
+    | '/services/companionship-care'
+    | '/services/live-in-care'
+    | '/services/personal-care'
+    | '/services/respite-care'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CareersRoute: typeof CareersRoute
+  ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
+  TeamRoute: typeof TeamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +221,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/respite-care': {
+      id: '/services/respite-care'
+      path: '/respite-care'
+      fullPath: '/services/respite-care'
+      preLoaderRoute: typeof ServicesRespiteCareRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/personal-care': {
+      id: '/services/personal-care'
+      path: '/personal-care'
+      fullPath: '/services/personal-care'
+      preLoaderRoute: typeof ServicesPersonalCareRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/live-in-care': {
+      id: '/services/live-in-care'
+      path: '/live-in-care'
+      fullPath: '/services/live-in-care'
+      preLoaderRoute: typeof ServicesLiveInCareRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/companionship-care': {
+      id: '/services/companionship-care'
+      path: '/companionship-care'
+      fullPath: '/services/companionship-care'
+      preLoaderRoute: typeof ServicesCompanionshipCareRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
 
+interface ServicesRouteChildren {
+  ServicesCompanionshipCareRoute: typeof ServicesCompanionshipCareRoute
+  ServicesLiveInCareRoute: typeof ServicesLiveInCareRoute
+  ServicesPersonalCareRoute: typeof ServicesPersonalCareRoute
+  ServicesRespiteCareRoute: typeof ServicesRespiteCareRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesCompanionshipCareRoute: ServicesCompanionshipCareRoute,
+  ServicesLiveInCareRoute: ServicesLiveInCareRoute,
+  ServicesPersonalCareRoute: ServicesPersonalCareRoute,
+  ServicesRespiteCareRoute: ServicesRespiteCareRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CareersRoute: CareersRoute,
+  ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
+  ServicesRoute: ServicesRouteWithChildren,
+  TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
