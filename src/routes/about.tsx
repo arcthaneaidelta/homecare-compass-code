@@ -12,8 +12,8 @@ import {
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import aboutImg from "@/assets/about-care.webp";
 
+const aboutImg = "/about-care.webp";
 const DIRECTOR_IMAGE_URL = "/mason-ward-director.png";
 
 
