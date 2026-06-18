@@ -11,7 +11,7 @@ import {
   Twitter,
   ArrowUpRight,
 } from "lucide-react";
-import logoAsset from "@/assets/wecare2-logo.png.asset.json";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,

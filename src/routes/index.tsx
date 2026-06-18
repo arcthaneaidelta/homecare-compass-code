@@ -612,7 +612,7 @@ function DirectorMessage() {
           <div className="relative">
             <div className="img-zoom rounded-[32px] shadow-elegant">
               <img
-                src={masonWardImg.url}
+                src="/mason-ward-director.png"
                 alt="Mason Ward, Director of Care at WeCare2"
                 className="size-full object-cover"
                 width={1024}
