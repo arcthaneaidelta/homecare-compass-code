@@ -101,7 +101,7 @@ export function SiteHeader() {
           )}
         >
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <img src="/wecare2-logo.png" alt="WeCare2" className="h-11 w-auto" width={120} height={44} />
+            <img src={logoUrl} alt="WeCare2" className="h-11 w-auto" width={120} height={44} />
             <span className="hidden flex-col leading-tight sm:flex">
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-red">
                 Domiciliary Care
@@ -166,7 +166,7 @@ export function SiteHeader() {
             <SheetContent side="right" className="w-[88vw] max-w-sm overflow-y-auto p-0">
               <SheetHeader className="border-b border-border/60 px-6 py-4 text-left">
                 <SheetTitle className="flex items-center gap-2">
-                  <img src="/wecare2-logo.png" alt="WeCare2" className="h-9 w-auto" />
+                  <img src={logoUrl} alt="WeCare2" className="h-9 w-auto" />
                   <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-red">
                     Domiciliary Care
                   </span>
