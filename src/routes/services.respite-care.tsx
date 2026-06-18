@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CalendarClock, Heart, ShieldCheck, Clock, Users, Sparkles } from "lucide-react";
 import { ServicePage } from "@/components/site/ServicePage";
-import img from "@/assets/care-overnight.webp";
+
+const img = "/care-overnight.webp";
 
 export const Route = createFileRoute("/services/respite-care")({
   head: () => ({
