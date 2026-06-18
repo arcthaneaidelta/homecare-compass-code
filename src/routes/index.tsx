@@ -37,7 +37,6 @@ import { cn } from "@/lib/utils";
 
 import heroImg from "@/assets/hero-domiciliary.webp";
 import aboutImg from "@/assets/about-care.webp";
-import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
 import hourlyImg from "@/assets/care-hourly.webp";
 import overnightImg from "@/assets/care-overnight.webp";
 import liveinImg from "@/assets/care-livein.webp";
@@ -613,7 +612,7 @@ function DirectorMessage() {
           <div className="relative">
             <div className="img-zoom rounded-[32px] shadow-elegant">
               <img
-                src={masonWardImg.url}
+                src="/mason-ward-director.png"
                 alt="Mason Ward, Director of Care at WeCare2"
                 className="size-full object-cover"
                 width={1024}

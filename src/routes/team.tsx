@@ -3,7 +3,7 @@ import { ShieldCheck, GraduationCap, BadgeCheck, ClipboardCheck } from "lucide-r
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
+
 
 export const Route = createFileRoute("/team")({
   head: () => ({
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/team")({
       { name: "description", content: "Meet the trained, DBS-checked carers and coordinators behind WeCare2 — the people delivering care every day." },
       { property: "og:title", content: "Meet The WeCare2 Care Team" },
       { property: "og:description", content: "Trained, vetted, and chosen for kindness as much as skill." },
-      { property: "og:image", content: masonWardImg.url },
+      { property: "og:image", content: "/mason-ward-director.png" },
     ],
   }),
   component: TeamPage,
@@ -47,7 +47,7 @@ function TeamPage() {
         title="The people behind"
         italic="every visit."
         description="Carefully selected, fully trained, and chosen for kindness as much as skill. Meet the coordinators and carers delivering WeCare2's care across the UK."
-        image={masonWardImg.url}
+        image="/mason-ward-director.png"
         crumbs={[{ label: "Our Team" }]}
       />
 

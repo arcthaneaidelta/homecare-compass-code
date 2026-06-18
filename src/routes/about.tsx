@@ -13,7 +13,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import aboutImg from "@/assets/about-care.webp";
-import masonWardImg from "@/assets/mason-ward-director.png.asset.json";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -61,7 +61,7 @@ function AboutPage() {
       <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="overflow-hidden rounded-[32px] shadow-card">
-            <img src={masonWardImg.url} alt="Mason Ward, Director of Care at WeCare2" className="size-full object-cover" loading="lazy" />
+            <img src="/mason-ward-director.png" alt="Mason Ward, Director of Care at WeCare2" className="size-full object-cover" loading="lazy" />
           </div>
           <div>
             <Eyebrow>Our Story</Eyebrow>
