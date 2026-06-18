@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, ArrowUpRight } from "lucide-react";
 
-const LOGO_URL = "/wecare2-logo.png";
+const LOGO_URL = "/wecare2-logo.webp";
 
 export function SiteFooter() {
   return (

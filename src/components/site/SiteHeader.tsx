@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
-const LOGO_URL = "/wecare2-logo.png";
+const LOGO_URL = "/wecare2-logo.webp";
 
 const SERVICES = [
   { label: "Personal Care", to: "/services/personal-care" },
