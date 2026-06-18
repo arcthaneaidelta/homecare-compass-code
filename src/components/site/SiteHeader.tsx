@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import logoUrl from "@/assets/wecare2-logo.png";
 import {
   Sheet,
   SheetContent,
@@ -29,6 +28,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+
+const LOGO_URL = "/wecare2-logo.png";
 
 const SERVICES = [
   { label: "Personal Care", to: "/services/personal-care" },
@@ -101,7 +102,7 @@ export function SiteHeader() {
           )}
         >
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <img src={logoUrl} alt="WeCare2" className="h-11 w-auto" width={120} height={44} />
+            <img src={LOGO_URL} alt="WeCare2" className="h-11 w-auto" width={120} height={44} />
             <span className="hidden flex-col leading-tight sm:flex">
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-red">
                 Domiciliary Care
@@ -166,7 +167,7 @@ export function SiteHeader() {
             <SheetContent side="right" className="w-[88vw] max-w-sm overflow-y-auto p-0">
               <SheetHeader className="border-b border-border/60 px-6 py-4 text-left">
                 <SheetTitle className="flex items-center gap-2">
-                  <img src={logoUrl} alt="WeCare2" className="h-9 w-auto" />
+                  <img src={LOGO_URL} alt="WeCare2" className="h-9 w-auto" />
                   <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-red">
                     Domiciliary Care
                   </span>
