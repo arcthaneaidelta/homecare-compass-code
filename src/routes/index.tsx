@@ -36,14 +36,14 @@ import { StatCounter } from "@/components/site/StatCounter";
 import { CtaBand } from "@/components/site/CtaBand";
 import { cn } from "@/lib/utils";
 
-import heroImg from "@/assets/hero-domiciliary.webp";
-import masonImg from "@/assets/mason-ward-director.png";
-import aboutImg from "@/assets/about-care.webp";
-import hourlyImg from "@/assets/care-hourly.webp";
-import overnightImg from "@/assets/care-overnight.webp";
-import liveinImg from "@/assets/care-livein.webp";
-import respiteImg from "@/assets/care-respite.webp";
-import contactImg from "@/assets/contact-carer.webp";
+const heroImg = "/hero-domiciliary.webp";
+const aboutImg = "/about-care.webp";
+const hourlyImg = "/care-hourly.webp";
+const overnightImg = "/care-overnight.webp";
+const liveinImg = "/care-livein.webp";
+const respiteImg = "/care-respite.webp";
+const contactImg = "/contact-carer.webp";
+const DIRECTOR_IMAGE_URL = "/mason-ward-director.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: heroImg },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" },
     ],
   }),
   component: HomePage,
@@ -614,7 +614,7 @@ function DirectorMessage() {
           <div className="relative">
             <div className="img-zoom rounded-[32px] shadow-elegant">
               <img
-                src={masonImg}
+                src={DIRECTOR_IMAGE_URL}
                 alt="Mason Ward, Director of Care at WeCare2"
                 className="size-full object-cover"
                 width={1024}

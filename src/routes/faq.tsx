@@ -9,7 +9,8 @@ import {
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import aboutImg from "@/assets/about-care.webp";
+
+const aboutImg = "/about-care.webp";
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
