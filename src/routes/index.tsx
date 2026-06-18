@@ -37,13 +37,14 @@ import { CtaBand } from "@/components/site/CtaBand";
 import { cn } from "@/lib/utils";
 
 import heroImg from "@/assets/hero-domiciliary.webp";
-import masonImg from "@/assets/mason-ward-director.png";
 import aboutImg from "@/assets/about-care.webp";
 import hourlyImg from "@/assets/care-hourly.webp";
 import overnightImg from "@/assets/care-overnight.webp";
 import liveinImg from "@/assets/care-livein.webp";
 import respiteImg from "@/assets/care-respite.webp";
 import contactImg from "@/assets/contact-carer.webp";
+
+const DIRECTOR_IMAGE_URL = "/mason-ward-director.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -614,7 +615,7 @@ function DirectorMessage() {
           <div className="relative">
             <div className="img-zoom rounded-[32px] shadow-elegant">
               <img
-                src={masonImg}
+                src={DIRECTOR_IMAGE_URL}
                 alt="Mason Ward, Director of Care at WeCare2"
                 className="size-full object-cover"
                 width={1024}
