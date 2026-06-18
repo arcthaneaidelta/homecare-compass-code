@@ -4,7 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Eyebrow } from "@/components/site/Eyebrow";
 
-const DIRECTOR_IMAGE_URL = "/mason-ward-director.png";
+const DIRECTOR_IMAGE_URL = "/mason-ward-director.webp";
 
 
 export const Route = createFileRoute("/team")({

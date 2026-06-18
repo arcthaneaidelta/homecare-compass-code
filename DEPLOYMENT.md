@@ -36,8 +36,8 @@ Use Nitro's `node-server` preset. The result is a self-contained Node app at
 
 Static images and other public files are copied into `.output/public` during
 the build. On Hostinger, deploy the full `.output` folder and run the server
-from the project root so URLs like `/wecare2-logo.png` and
-`/mason-ward-director.png` resolve correctly.
+from the project root so URLs like `/wecare2-logo.webp` and
+`/mason-ward-director.webp` resolve correctly.
 
 ### One-time VPS setup
 
@@ -63,7 +63,7 @@ bun install
 NITRO_PRESET=node-server bun run build
 
 # Confirm public images were copied into the deployable output
-ls .output/public/wecare2-logo.png .output/public/mason-ward-director.png
+ls .output/public/wecare2-logo.webp .output/public/mason-ward-director.webp
 
 # Start with PM2 using the provided ecosystem file
 pm2 start ecosystem.config.cjs

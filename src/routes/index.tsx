@@ -43,7 +43,7 @@ const overnightImg = "/care-overnight.webp";
 const liveinImg = "/care-livein.webp";
 const respiteImg = "/care-respite.webp";
 const contactImg = "/contact-carer.webp";
-const DIRECTOR_IMAGE_URL = "/mason-ward-director.png";
+const DIRECTOR_IMAGE_URL = "/mason-ward-director.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
