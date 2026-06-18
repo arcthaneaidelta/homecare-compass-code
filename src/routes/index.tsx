@@ -18,6 +18,7 @@ import {
   ClipboardCheck,
   UserCheck,
   Repeat,
+
   CalendarCheck,
   Quote,
   BadgeCheck,
@@ -36,6 +37,7 @@ import { CtaBand } from "@/components/site/CtaBand";
 import { cn } from "@/lib/utils";
 
 import heroImg from "@/assets/hero-domiciliary.webp";
+import masonImg from "@/assets/mason-ward-director.png";
 import aboutImg from "@/assets/about-care.webp";
 import hourlyImg from "@/assets/care-hourly.webp";
 import overnightImg from "@/assets/care-overnight.webp";
@@ -612,7 +614,7 @@ function DirectorMessage() {
           <div className="relative">
             <div className="img-zoom rounded-[32px] shadow-elegant">
               <img
-                src="/mason-ward-director.png"
+                src={masonImg}
                 alt="Mason Ward, Director of Care at WeCare2"
                 className="size-full object-cover"
                 width={1024}
