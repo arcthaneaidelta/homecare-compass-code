@@ -6,7 +6,14 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Force Nitro on so `bun run build` outside the Lovable sandbox produces a
+// deployable server bundle. The target preset is picked automatically:
+//   - Vercel CI sets VERCEL=1 → Nitro auto-detects `vercel` preset.
+//   - For Hostinger VPS (or any Node host) set NITRO_PRESET=node-server.
+//   - Override anytime with NITRO_PRESET=<preset>.
+// Inside the Lovable sandbox this option is ignored and Cloudflare is used.
 export default defineConfig({
+  nitro: true,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
