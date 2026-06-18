@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, ArrowUpRight } from "lucide-react";
-import logoUrl from "@/assets/wecare2-logo.png";
 
+const LOGO_URL = "/wecare2-logo.png";
 
 export function SiteFooter() {
   return (
@@ -10,7 +10,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <div className="inline-flex items-center gap-2 rounded-2xl bg-white px-3 py-2">
-              <img src={logoUrl} alt="WeCare2" className="h-10 w-auto" width={110} height={40} />
+              <img src={LOGO_URL} alt="WeCare2" className="h-10 w-auto" width={110} height={40} />
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
               Professional domiciliary care delivered with compassion, dignity and reliability —
