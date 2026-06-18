@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import logoUrl from "@/assets/wecare2-logo.png";
 import {
   Sheet,
   SheetContent,
