@@ -574,8 +574,7 @@ function WhyChooseUs() {
             <span className="display-italic text-brand-red">thrive, not just survive.</span>
           </h2>
           <p className="mt-5 text-muted-foreground sm:text-lg">
-            We blend professional clinical standards with genuine human warmth — the kind of care
-            we would want for our own families.
+            Our professional team all meet clinical standards & provide a genuine warmth to your loved ones.
           </p>
           <ol className="mt-8 space-y-5">
             {REASONS.map(({ icon: Icon, t, d }, i) => (
