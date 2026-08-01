@@ -4,6 +4,8 @@ import {
   Phone,
   Mail,
   Clock,
+  MapPin,
+
   Menu,
   ChevronDown,
   Facebook,
@@ -69,8 +71,12 @@ export function SiteHeader() {
               <Mail className="size-3.5" /> admin@wecare2.co.uk
             </a>
             <span className="flex items-center gap-2 opacity-90">
-              <Clock className="size-3.5" /> Mon – Sun · 7am – 10pm
+              <Clock className="size-3.5" /> Mon – Fri 7am – 9pm · Sat 7am – 3pm · Sun Closed
             </span>
+            <span className="hidden items-center gap-2 opacity-90 xl:flex">
+              <MapPin className="size-3.5" /> 48 Dartmouth St, Walney, LA14 3AS
+            </span>
+
           </div>
           <div className="flex items-center gap-3">
             <a href="#" aria-label="Facebook" className="grid size-7 place-items-center rounded-full border border-white/30 hover:bg-white/10">
