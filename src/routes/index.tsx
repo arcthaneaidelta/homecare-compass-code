@@ -154,7 +154,7 @@ function Hero() {
                 custom={3}
                 className="mt-8 max-w-md text-sm leading-relaxed text-white/80 sm:text-base"
               >
-                At Wecare2, we understand that our clients require our deepest respect along their Personal Journey.&nbsp; That’s why at Wecare2 we focus on providing a personalised, person-centred care.
+                At Wecare2 homecare, we understand that our clients require our deepest respect along their Personal Journey.&nbsp; That’s why at Wecare2 we focus on providing a personalised, person-centred care.
               </motion.p>
 
               <motion.div
