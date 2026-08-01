@@ -10,12 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamRouteImport } from './routes/team'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesRespiteCareRouteImport } from './routes/services.respite-care'
 import { Route as ServicesPersonalCareRouteImport } from './routes/services.personal-care'
 import { Route as ServicesLiveInCareRouteImport } from './routes/services.live-in-care'
@@ -24,11 +24,6 @@ import { Route as ServicesCompanionshipCareRouteImport } from './routes/services
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -54,6 +49,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRespiteCareRoute = ServicesRespiteCareRouteImport.update({
@@ -84,12 +84,12 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/services/companionship-care': typeof ServicesCompanionshipCareRoute
   '/services/live-in-care': typeof ServicesLiveInCareRoute
   '/services/personal-care': typeof ServicesPersonalCareRoute
   '/services/respite-care': typeof ServicesRespiteCareRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,12 +97,12 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/services/companionship-care': typeof ServicesCompanionshipCareRoute
   '/services/live-in-care': typeof ServicesLiveInCareRoute
   '/services/personal-care': typeof ServicesPersonalCareRoute
   '/services/respite-care': typeof ServicesRespiteCareRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -111,12 +111,12 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/services/companionship-care': typeof ServicesCompanionshipCareRoute
   '/services/live-in-care': typeof ServicesLiveInCareRoute
   '/services/personal-care': typeof ServicesPersonalCareRoute
   '/services/respite-care': typeof ServicesRespiteCareRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -126,12 +126,12 @@ export interface FileRouteTypes {
     | '/careers'
     | '/contact'
     | '/faq'
-    | '/services'
     | '/team'
     | '/services/companionship-care'
     | '/services/live-in-care'
     | '/services/personal-care'
     | '/services/respite-care'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,12 +139,12 @@ export interface FileRouteTypes {
     | '/careers'
     | '/contact'
     | '/faq'
-    | '/services'
     | '/team'
     | '/services/companionship-care'
     | '/services/live-in-care'
     | '/services/personal-care'
     | '/services/respite-care'
+    | '/services'
   id:
     | '__root__'
     | '/'
@@ -152,12 +152,12 @@ export interface FileRouteTypes {
     | '/careers'
     | '/contact'
     | '/faq'
-    | '/services'
     | '/team'
     | '/services/companionship-care'
     | '/services/live-in-care'
     | '/services/personal-care'
     | '/services/respite-care'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -166,8 +166,8 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
   TeamRoute: typeof TeamRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -177,13 +177,6 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -221,6 +214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/respite-care': {
       id: '/services/respite-care'
       path: '/respite-care'
@@ -252,33 +252,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ServicesRouteChildren {
-  ServicesCompanionshipCareRoute: typeof ServicesCompanionshipCareRoute
-  ServicesLiveInCareRoute: typeof ServicesLiveInCareRoute
-  ServicesPersonalCareRoute: typeof ServicesPersonalCareRoute
-  ServicesRespiteCareRoute: typeof ServicesRespiteCareRoute
-}
-
-const ServicesRouteChildren: ServicesRouteChildren = {
-  ServicesCompanionshipCareRoute: ServicesCompanionshipCareRoute,
-  ServicesLiveInCareRoute: ServicesLiveInCareRoute,
-  ServicesPersonalCareRoute: ServicesPersonalCareRoute,
-  ServicesRespiteCareRoute: ServicesRespiteCareRoute,
-}
-
-const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
-  ServicesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  ServicesRoute: ServicesRouteWithChildren,
   TeamRoute: TeamRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
