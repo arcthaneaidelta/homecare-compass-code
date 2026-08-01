@@ -555,12 +555,11 @@ function WhyChooseUs() {
             className="aspect-[4/5] size-full object-cover"
             loading="lazy"
           />
-          <div className="absolute -right-4 bottom-8 hidden rounded-2xl bg-white px-5 py-4 shadow-elegant sm:block">
-            <div className="flex items-center gap-1 text-brand-red">
-              {[...Array(5)].map((_, i) => <Star key={i} className="size-3.5 fill-current" />)}
-            </div>
-            <p className="mt-1 text-sm font-semibold text-navy">4.9 / 5 average rating</p>
-            <p className="text-xs text-muted-foreground">From 500+ families across the UK</p>
+          <div className="absolute -right-4 bottom-8 hidden max-w-[16rem] rounded-2xl bg-white px-5 py-4 shadow-elegant sm:block">
+            <p className="text-sm font-semibold text-navy">WeCare2 homecare</p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              Compassionate support that lets you stay safe, comfortable and independent in the home you love.
+            </p>
           </div>
         </div>
         <div>
