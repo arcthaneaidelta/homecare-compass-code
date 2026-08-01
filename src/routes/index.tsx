@@ -627,8 +627,7 @@ function DirectorMessage() {
           <div>
             <Eyebrow>Director's Message</Eyebrow>
             <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
-              Making Every Moment Matter A personal commitment to our&nbsp;
-&nbsp;exceptional care standards.
+              Making Every Moment Matter A personal commitment to our&nbsp;exceptional care standards.
             </h2>
             <p className="mt-5 text-muted-foreground sm:text-lg">
               As one of the founders of Wecare2, I am delighted to share with you what we have learnt from our experience as a leading care provider.&nbsp;&nbsp;
