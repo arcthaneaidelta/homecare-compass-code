@@ -113,9 +113,9 @@ function Hero() {
   };
 
   const trustItems = [
-    { icon: Users, t: "Family-Like Bonds, Not Just Carers and Clients" },
+    { icon: Users, t: "Professional, Friendly & Family Orientated Care Team" },
     { icon: ShieldCheck, t: "Comfort That Never Compromises on Dignity" },
-    { icon: Sparkles, t: "Every Detail Designed Around Each Individual" },
+    { icon: Sparkles, t: "Our Clients are Cared for & Tailored to with our Experienced Team" },
   ];
 
   return (
@@ -154,8 +154,7 @@ function Hero() {
                 custom={3}
                 className="mt-8 max-w-md text-sm leading-relaxed text-white/80 sm:text-base"
               >
-                At WeCare2, we understand that ageing is a deeply personal journey. That&apos;s
-                why we focus on personalised, person-centred care that nurtures mind, body and spirit.
+                At Wecare2, we understand that our clients require our deepest respect along their Personal Journey.&nbsp; That’s why at Wecare2 we focus on providing a personalised, person-centred care.
               </motion.p>
 
               <motion.div
@@ -634,13 +633,13 @@ function DirectorMessage() {
           <div>
             <Eyebrow>Director's Message</Eyebrow>
             <h2 className="mt-4 text-balance text-3xl sm:text-4xl md:text-5xl">
-              A personal commitment to{" "}
-              <span className="display-italic text-brand-red">exceptional care.</span>
+              Making Every Moment Matter A personal commitment to our&nbsp;
+&nbsp;exceptional care standards.
             </h2>
             <p className="mt-5 text-muted-foreground sm:text-lg">
-              WeCare2 was founded to bring person-centred, family-focused care into more homes
-              across the UK. We hold ourselves to the same standard we would expect for our own
-              loved ones — compassion, dignity, independence and complete trust.
+              As one of the founders of Wecare2, I am delighted to share with you what we have learnt from our experience as a leading care provider.&nbsp;&nbsp;
+              You have allowed us a team to develop & help influence the industry as a person focused & family orientated care provider.
+              ‘We have been implementing our high care standards for many years now’
             </p>
 
             <div className="mt-8 flex items-end gap-4">
