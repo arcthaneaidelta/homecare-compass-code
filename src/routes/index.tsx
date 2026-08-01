@@ -139,15 +139,15 @@ function Hero() {
             />
             <div className="relative flex h-full flex-col">
               <motion.div variants={fadeUp} custom={1}>
-                <Eyebrow className="text-brand-red">Discover The Power Of Premium</Eyebrow>
+                <Eyebrow className="text-brand-red">We understand how important it is to be heard</Eyebrow>
               </motion.div>
               <motion.h1
                 variants={fadeUp}
                 custom={2}
                 className="mt-5 text-balance text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl"
               >
-                Delivering compassionate home care that honours each{" "}
-                <span className="display-italic text-white/95">individual&apos;s life journey.</span>
+                Delivering compassionate home care that{" "}
+                <span className="display-italic text-white/95">Respects each individual&apos;s life journey.</span>
               </motion.h1>
               <motion.p
                 variants={fadeUp}
@@ -278,14 +278,14 @@ function Hero() {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="size-4 fill-current" />
               ))}
-              <span className="ml-2 text-sm font-semibold text-navy">4.9 / 5</span>
+              <span className="ml-2 text-sm font-semibold text-navy">{"\n"}</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
-              Rated by 500+ families for compassionate, dependable home care.
+              {"\n"}
             </p>
             <div className="mt-5 flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-navy">
-                <BadgeCheck className="size-3.5 text-brand-red" /> CQC Aligned
+                <BadgeCheck className="size-3.5 text-brand-red" /> CQC Certified
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-navy">
                 <ShieldCheck className="size-3.5 text-brand-red" /> DBS Checked
@@ -320,9 +320,9 @@ function Hero() {
 function AboutSection() {
   const ABOUT_POINTS = [
     "Person-centred care plans built around routines, preferences and goals.",
-    "Carefully matched carers — same familiar face, visit after visit.",
-    "Fully trained, DBS-checked and continuously supported staff.",
-    "Family portal with real-time visit notes and updates.",
+    "Carefully matched carers same familiar face, visit after visit.",
+    "Fully trained, DBS-checked staff recruited through CQC Regulation 19 compliant safer recruitment",
+    "Family portal with real-time visit notes and updates for complete peace of mind.",
   ];
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
@@ -364,9 +364,7 @@ function AboutSection() {
             <span className="display-italic text-brand-red">compassion and respect</span> always.
           </h2>
           <p className="mt-5 text-muted-foreground sm:text-lg">
-            WeCare2 is a UK domiciliary care provider supporting people to live independently
-            and well in their own home. From a few hours a week of companionship to round-the-clock
-            live-in care, we tailor every plan to the person — never the schedule.
+            WeCare2 is a UK domiciliary care provider supporting people to live independently and well in the comfort of their own home. From a few hours of companionship each week to round-the-clock live-in care, every care plan is tailored to the individual not the schedule. We are committed to delivering safe, compassionate, and high-quality care while meeting the standards set by the Care Quality Commission (CQC).
           </p>
 
           <ul className="mt-7 grid gap-3 sm:grid-cols-2">
