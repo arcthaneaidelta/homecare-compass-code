@@ -37,7 +37,7 @@ const GROUPS: { title: string; items: { q: string; a: string }[] }[] = [
   {
     title: "Care & Carers",
     items: [
-      { q: "Are your carers trained and DBS-checked?", a: "Every WeCare2 carer is enhanced DBS-checked, completes the Care Certificate, and is paired with a senior carer for shadow shifts before working independently." },
+      { q: "Are your carers trained and DBS-checked?", a: "Every WeCare2 carer is enhanced DBS-checked, and is paired with a senior carer for shadow shifts before working independently." },
       { q: "Will the same carer visit every time?", a: "Wherever possible, yes. Consistency matters, so we build small, dedicated teams around each client to ensure familiar faces and routines." },
       { q: "Can you support people with dementia?", a: "Yes. Our carers receive specialist dementia training and follow personalised plans designed around the person's history and preferences." },
     ],
