@@ -191,7 +191,7 @@ function CareerApplication() {
             <Field label="Full Name"><Input required name="name" placeholder="Jane Doe" /></Field>
             <Field label="Email"><Input required type="email" name="email" placeholder="jane@example.com" /></Field>
             <Field label="Phone"><Input required type="tel" name="phone" placeholder="07…" /></Field>
-            <Field label="Postcode"><Input required name="postcode" placeholder="LA6 1FQ" /></Field>
+            <Field label="Postcode"><Input required name="postcode" placeholder="LA14 3AS" /></Field>
           </div>
           <Field label="Role of interest">
             <Select name="role">

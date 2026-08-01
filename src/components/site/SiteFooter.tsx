@@ -62,12 +62,13 @@ export function SiteFooter() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 size-4 shrink-0 text-brand-red" />
-                <span>Monday – Sunday · 7am – 10pm</span>
+                <span>Mon – Fri: Open 7am – 9pm · Sat: Open 7am – 3pm · Sun: Closed</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-brand-red" />
-                <span>Clear Water Fisheries, Warton, Carnforth LA6 1FQ</span>
+                <span>48 Dartmouth St, Walney, LA14 3AS</span>
               </li>
+
             </ul>
             <Link
               to="/contact"

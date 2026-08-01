@@ -183,8 +183,9 @@ function Hero() {
                     </defs>
                     <text fill="currentColor" className="text-[11px] uppercase tracking-[0.18em]">
                       <textPath href="#hero-badge-circle">
-                        Book Assessment • Book Assessment •
+                        Book Assessment
                       </textPath>
+
                     </text>
                   </svg>
                   <ArrowUpRight className="size-6 text-brand-red transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -259,11 +260,15 @@ function Hero() {
             <dl className="space-y-2 text-sm">
               <div className="flex items-center justify-between">
                 <dt className="text-navy/80">Monday – Friday</dt>
-                <dd className="font-semibold">8:00 AM – 8:00 PM</dd>
+                <dd className="font-semibold">Open 7am – 9pm</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-navy/80">Saturday – Sunday</dt>
-                <dd className="font-semibold">On-Call 24/7</dd>
+                <dt className="text-navy/80">Saturday</dt>
+                <dd className="font-semibold">Open 7am – 3pm</dd>
+              </div>
+              <div className="flex items-center justify-between">
+                <dt className="text-navy/80">Sunday</dt>
+                <dd className="font-semibold">Closed</dd>
               </div>
             </dl>
           </motion.div>
@@ -272,17 +277,7 @@ function Hero() {
             variants={fadeUp}
             className="hidden rounded-[28px] bg-surface p-7 shadow-card sm:p-8 lg:block"
           >
-            <Eyebrow>Trusted Across The UK</Eyebrow>
-            <div className="mt-4 flex items-center gap-1 text-brand-red">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="size-4 fill-current" />
-              ))}
-              <span className="ml-2 text-sm font-semibold text-navy">{"\n"}</span>
-            </div>
-            <p className="mt-3 text-sm text-muted-foreground">
-              {"\n"}
-            </p>
-            <div className="mt-5 flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-navy">
                 <BadgeCheck className="size-3.5 text-brand-red" /> CQC Certified
               </span>
@@ -290,6 +285,7 @@ function Hero() {
                 <ShieldCheck className="size-3.5 text-brand-red" /> DBS Checked
               </span>
             </div>
+
           </motion.div>
         </motion.div>
 

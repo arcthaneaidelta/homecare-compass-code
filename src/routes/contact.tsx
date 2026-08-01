@@ -27,8 +27,9 @@ export const Route = createFileRoute("/contact")({
 const DETAILS = [
   { icon: Phone, t: "Call Us", d: "01229 846646", href: "tel:01229846646" },
   { icon: Mail, t: "Email", d: "admin@wecare2.co.uk", href: "mailto:admin@wecare2.co.uk" },
-  { icon: Clock, t: "Open Hours", d: "Monday – Sunday · 7am – 10pm" },
-  { icon: MapPin, t: "Address", d: "Clear Water Fisheries, Warton, Carnforth LA6 1FQ" },
+  { icon: Clock, t: "Open Hours", d: "Mon – Fri: 7am – 9pm · Sat: 7am – 3pm · Sun: Closed" },
+  { icon: MapPin, t: "Address", d: "48 Dartmouth St, Walney, LA14 3AS" },
+
 ];
 
 function ContactPage() {
@@ -122,7 +123,7 @@ function ContactPage() {
         <div className="overflow-hidden rounded-[32px] border border-border shadow-card">
           <iframe
             title="WeCare2 location"
-            src="https://www.google.com/maps?q=Warton+Carnforth+LA6+1FQ&output=embed"
+            src="https://www.google.com/maps?q=48+Dartmouth+St+Walney+LA14+3AS&output=embed"
             className="h-[420px] w-full"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -158,7 +159,7 @@ function ContactForm() {
         <Field label="Your Name"><Input required name="name" placeholder="Jane Doe" /></Field>
         <Field label="Email"><Input required type="email" name="email" placeholder="jane@example.com" /></Field>
         <Field label="Phone"><Input required type="tel" name="phone" placeholder="07…" /></Field>
-        <Field label="Postcode"><Input required name="postcode" placeholder="LA6 1FQ" /></Field>
+        <Field label="Postcode"><Input required name="postcode" placeholder="LA14 3AS" /></Field>
       </div>
       <Field label="Service Required">
         <Select name="service">
