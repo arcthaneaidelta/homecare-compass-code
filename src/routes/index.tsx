@@ -181,12 +181,12 @@ function Hero() {
                         d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
                       />
                     </defs>
-                    <text fill="currentColor" className="text-[11px] uppercase tracking-[0.18em]">
-                      <textPath href="#hero-badge-circle">
+                    <text fill="currentColor" className="text-[10px] uppercase" style={{ letterSpacing: "0.66em" }}>
+                      <textPath href="#hero-badge-circle" startOffset="50%" textAnchor="middle">
                         Book Assessment
                       </textPath>
-
                     </text>
+
                   </svg>
                   <ArrowUpRight className="size-6 text-brand-red transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>

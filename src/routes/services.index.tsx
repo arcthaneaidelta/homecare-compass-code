@@ -19,7 +19,7 @@ import { Eyebrow } from "@/components/site/Eyebrow";
 
 const aboutImg = "/about-care.webp";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Home Care Services — WeCare2 Domiciliary Care" },
