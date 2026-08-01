@@ -33,7 +33,7 @@ export const Route = createFileRoute("/services")({
 });
 
 const PRIMARY = [
-  { icon: HeartHandshake, t: "Personal Care", d: "Discreet, dignified support with bathing, dressing, hygiene and continence.", to: "/services/personal-care" },
+  { icon: HeartHandshake, t: "Personal Care", d: "Dignified support with bathing, dressing, hygiene and continence.", to: "/services/personal-care" },
   { icon: Sun, t: "Live-In Care", d: "Round-the-clock dedicated care from a carer who lives in your home.", to: "/services/live-in-care" },
   { icon: Users, t: "Companionship Care", d: "Warm conversation, hobbies and trips out that brighten every day.", to: "/services/companionship-care" },
   { icon: CalendarClock, t: "Respite Care", d: "Flexible cover that gives family carers a well-deserved break.", to: "/services/respite-care" },
@@ -42,10 +42,10 @@ const PRIMARY = [
 const ADDITIONAL = [
   { icon: Pill, t: "Medication Assistance", d: "Prompts, administration and tracking by trained carers." },
   { icon: UtensilsCrossed, t: "Meal Preparation", d: "Home-cooked meals tailored to taste, culture and dietary needs." },
-  { icon: HomeIcon, t: "Household Support", d: "Light housekeeping, laundry and errands to keep home running." },
+  { icon: HomeIcon, t: "Household Support", d: "Light housekeeping, laundry and errands to keep the home running." },
   { icon: Activity, t: "Mobility Assistance", d: "Safe transfers, walking support and gentle exercise." },
-  { icon: Moon, t: "Overnight Care", d: "Reassuring waking or sleeping cover through the night." },
-  { icon: Brain, t: "Dementia Support", d: "Specialist, patient care for those living with dementia." },
+  { icon: Moon, t: "Overnight Care", d: "Reassuring waking or sleeping cover throughout the night." },
+  { icon: Brain, t: "Dementia Support", d: "Specialist, person-centered care for those living with dementia." },
   { icon: ShieldPlus, t: "Post-Hospital Care", d: "Smooth, supported recovery after a stay in hospital." },
   { icon: HeartHandshake, t: "End-of-Life Care", d: "Compassionate, dignified palliative support at home." },
 ];
