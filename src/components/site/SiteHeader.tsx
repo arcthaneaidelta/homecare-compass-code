@@ -209,7 +209,9 @@ export function SiteHeader() {
                 <div className="mt-8 space-y-3 rounded-2xl bg-surface px-4 py-4 text-sm text-muted-foreground">
                   <p className="flex items-center gap-2"><Phone className="size-4 text-brand-red" /> 01229 846646</p>
                   <p className="flex items-center gap-2"><Mail className="size-4 text-brand-red" /> admin@wecare2.co.uk</p>
-                  <p className="flex items-center gap-2"><Clock className="size-4 text-brand-red" /> Mon – Sun · 7am – 10pm</p>
+                  <p className="flex items-center gap-2"><Clock className="size-4 text-brand-red" /> Mon – Fri 7am – 9pm · Sat 7am – 3pm · Sun Closed</p>
+                  <p className="flex items-center gap-2"><MapPin className="size-4 text-brand-red" /> 48 Dartmouth St, Walney, LA14 3AS</p>
+
                 </div>
               </div>
             </SheetContent>
