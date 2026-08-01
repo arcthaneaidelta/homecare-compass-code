@@ -411,7 +411,7 @@ const SERVICES = [
   { icon: HomeIcon, t: "Live-In Care", d: "Round-the-clock dedicated care from a carer who lives with you.", img: liveinImg, to: "/services/live-in-care" },
   { icon: Users, t: "Companionship Care", d: "Warm conversation, hobbies and trips out that brighten every day.", img: aboutImg, to: "/services/companionship-care" },
   { icon: CalendarCheck, t: "Respite Care", d: "Flexible cover that gives family carers a well-deserved break.", img: respiteImg, to: "/services/respite-care" },
-  { icon: Brain, t: "Dementia & Overnight", d: "Specialist, patient support through day and night.", img: overnightImg, to: "/services" },
+  { icon: Brain, t: "Dementia & Overnight", d: "Specialist, person-centered support through day and night.", img: overnightImg, to: "/services" },
 ];
 
 function ServicesSection() {
