@@ -34,9 +34,9 @@ export const Route = createFileRoute("/about")({
 const VALUES = [
   { icon: HeartHandshake, t: "Compassion", d: "Every visit begins with genuine kindness and patience." },
   { icon: ShieldCheck, t: "Integrity", d: "Honest, transparent communication with families." },
-  { icon: Sparkles, t: "Dignity", d: "Discreet, considerate support — always on your terms." },
+  { icon: Sparkles, t: "Dignity", d: "Dignified, considerate support — always on your terms." },
   { icon: Users, t: "Respect", d: "Care that honours your choices, identity and routines." },
-  { icon: Compass, t: "Independence", d: "Care that supports — never replaces — what you can do." },
+  { icon: Compass, t: "Independence", d: "Care that supports\u00a0 never replaces\u00a0 what you can do." },
   { icon: Award, t: "Excellence", d: "Continual training, supervision and improvement." },
 ];
 
