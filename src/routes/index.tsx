@@ -183,7 +183,9 @@ function Hero() {
                       />
                     </defs>
                     <text fill="currentColor" className="text-[11px] uppercase tracking-[0.18em]">
-                      <textPath href="#hero-badge-circle">{" "}</textPath>
+                      <textPath href="#hero-badge-circle">
+                        Book Assessment • Book Assessment •
+                      </textPath>
                     </text>
                   </svg>
                   <ArrowUpRight className="size-6 text-brand-red transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
