@@ -544,9 +544,9 @@ function ServiceCtaBanner() {
 
 /* ---------------- Why Choose Us ---------------- */
 const REASONS = [
-  { icon: HeartHandshake, t: "Compassionate & Experienced Staff", d: "Carefully selected carers with real warmth, deep training and ongoing support." },
+  { icon: HeartHandshake, t: "Compassionate & Experienced Staff", d: "The Kind of care you you would expect for your own relatives and family members." },
   { icon: ShieldCheck, t: "Outstanding Standards of Service", d: "CQC-aligned policies, DBS-checked staff and rigorous quality monitoring." },
-  { icon: Sparkles, t: "Holistic Approach to Wellbeing", d: "Care that nurtures mind and body — companionship, nutrition and routine matter." },
+  { icon: Sparkles, t: "Holistic Approach to Wellbeing", d: "Care that provides a nurturing environment & promotes a sense of routine for each individual" },
 ];
 function WhyChooseUs() {
   return (
@@ -574,8 +574,7 @@ function WhyChooseUs() {
             <span className="display-italic text-brand-red">thrive, not just survive.</span>
           </h2>
           <p className="mt-5 text-muted-foreground sm:text-lg">
-            We blend professional clinical standards with genuine human warmth — the kind of care
-            we would want for our own families.
+            Our professional team all meet clinical standards & provide a genuine warmth to your loved ones.
           </p>
           <ol className="mt-8 space-y-5">
             {REASONS.map(({ icon: Icon, t, d }, i) => (
