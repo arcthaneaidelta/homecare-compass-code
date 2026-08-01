@@ -36,9 +36,9 @@ function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact Us"
-        title="Let's talk about"
-        italic="the care you need."
-        description="A friendly coordinator will guide you through every option — at your pace, with no pressure. Free, no-obligation home assessments usually within 24 hours."
+        title="Let’s discusss the care that you will be requiring&nbsp; the care you need."
+        italic="for your loved one’s or even yourself."
+        description="Your Home Assesments can be organised & provided within 24 hours, typically. One of our friendly coordinator’s will be more than happy to guide you through every step of the service we can provide. There is no pressure. There is no rush, we are here to help and provide you with a no obligation service."
         image={img}
         crumbs={[{ label: "Contact" }]}
       />
